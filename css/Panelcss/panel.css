@@ -1,0 +1,97 @@
+
+.contenedor{
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: rgba(246, 242, 242, 0.608);
+}
+
+.panel-contenedor{
+    width: 100%;
+    margin: 0 15%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.casa-panel{
+       width: 70%;
+       display: flex;
+       flex-direction: row;
+       border-radius: 5px;
+       background-color: rgb(77, 234, 106);
+
+}
+
+.buscador , .filtro{
+    width: 70%;
+    margin: 0 15%;
+    height: 35px ;
+    border-radius: 15px;
+}
+
+.flex-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.filtro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    height: 76px;
+    margin: 0 15%;
+    background-color: rgba(206, 183, 183, 0.541);
+}
+
+.filtro div{
+    flex: 1;
+}
+
+.filtro div p{
+      margin: 0;
+      padding: 0;
+}
+
+
+.img-panel , 
+.comunidad-panel , 
+.precio-panel , 
+.id-panel , 
+.casa-panel , 
+.botones{
+    text-align: center;
+    flex: 1;
+}
+
+.boton{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;   
+    gap: 6.5px;
+}
+
+.boton button{
+   flex: 1;
+}
+
+.id-panel p{
+  padding-left: 20px;
+}
+
+.casa-panel p:nth-child(1){
+      background-color: rgba(237, 230, 230, 0.521);
+}
+
+
+.transparente{
+    background-color: red !important;
+    border-color: rgba(0, 0, 0, 0.1);
+}

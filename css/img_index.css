@@ -1,0 +1,50 @@
+
+.img1{
+    height: calc(88.3vh);
+}
+
+.img2{
+    width: 100%;
+    height: 100%;
+    background:url(../img/house-1477041_1920.jpg) ;
+    background-size: cover;
+    background-position: center;
+}
+
+.texto{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.texto-img{
+    width: 300px;
+    color: #fff;
+    padding: 15px;
+    background-color: rgba(15, 14, 14, 0.473);
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(8.5px, 1.5vw, 17px);  
+}
+
+.titulo-texto{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(34.5px, 4vw, 64.5px);  
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    white-space: normal; 
+}
+
+.boton{
+    width: clamp(80px, 9vw, 150px);  /* Min: 80px, Ideal: 9% del viewport, Max: 150px */
+    height: clamp(26px, 3.5vw, 56px); /* Min: 45px, Ideal: 55px, Max: 65px */
+    background-color: #e52f3c;
+    border: 0;
+    color: #fff;
+    font-size: clamp(12px, 1.5vw, 17px);  /* Corregido para mantener el efecto responsive */
+    font-weight: 600;
+}

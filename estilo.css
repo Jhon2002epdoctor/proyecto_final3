@@ -1,0 +1,81 @@
+
+:root{
+    --color_card: #1452eeeb;
+}
+a{
+    list-style: none;
+    text-decoration: none;
+}
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+p{
+    margin: 0;
+}
+.costo-proyecto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;  
+    background-color: #1f386e;
+    flex-direction: row;
+    padding: 5vh 0;
+}
+
+.costo-proyecto-texto {
+    margin: 0 30px;
+}
+
+.costo-proyecto-texto p {
+    margin: 0 0 10px 0;
+    font-weight: 200;
+    color: #fff; 
+}
+
+.costo-proyecto-texto p:nth-child(1) {
+    font-size: clamp(18px, 2.8vw, 28px); 
+}
+
+.costo-proyecto-texto p:nth-child(2) {
+    font-size: clamp(15px, 1.95vw, 19.5px); 
+    color: rgba(118, 114, 114, 0.644); 
+}
+
+.boton2 {
+    width: clamp(90px, 9vw, 160px); 
+    height: clamp(43px, 3.5vw, 60px);
+    background-color: #e52f3c;
+    border: 1.3px solid #fff;
+    color: #fff;
+    font-size: clamp(12px, 1.1vw, 17px);
+    font-weight: 600;
+    padding: 0 20px; 
+}
+
+@media (max-width: 768px) { 
+    .costo-proyecto {
+        flex-direction: column;  
+        gap: 20px;  
+    }
+}
+
+
+.ojo:hover {
+    color: red; 
+    cursor: pointer; 
+}
+
+.corazon:hover {
+    color: red; 
+    cursor: pointer; 
+}
+
+.transparente{
+    background-color: red !important;
+    border-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,133 @@
+.header {
+    width: 100%;
+    height: 120px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 999;
+}
+
+.nav, .nav ul {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav ul {
+    gap: 70px;
+    padding: 0; 
+    margin: 0;
+}
+
+.nav ul li {
+   font: 700 18.5px Verdana, Geneva, Tahoma, sans-serif; /* Shorthand para font */
+   color: #1f386e;
+}
+
+.logo img{
+    width: 100%;
+    height: 120px;
+}
+
+.menu_despegable {
+    display: none;
+}
+
+.megusta{
+    padding-right: 40px;
+}
+
+.menu_despegable{
+    padding-right: 40px;
+}
+
+.menu_despegable_visible{
+    display: none;
+}
+@media screen and (max-width: 870px) {
+    .nav { margin: 0px 15px; }
+    .nav ul { display: none; }
+    .menu_despegable { display: block; }
+    .megusta{
+        display: none;
+    }
+    
+    .menu_despegable_visible li{
+         padding: 30px;
+    }
+
+
+    .menu_despegable:hover .menu_despegable_visible{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          transform: translate(-70%,0px);
+          background-color: tomato;
+          gap: 0px;
+    }
+
+     
+    .menu_despegable_visible li:hover{
+        background-color: turquoise;
+        width: 100%;
+ 
+  }
+
+}
+
+@media screen and (max-width: 750px) {
+    .nav ul { display: none; }
+    .menu_despegable { display: block; }
+    .megusta { display: none; }
+}
+
+
+
+.panel{
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    overflow-y: auto;
+    background-color: var(--second-color);
+    transition: transform 0.3s ease  ,  opacity .3s ease;
+    transform: translate(0 ,-100%);
+
+}
+
+.is-active{
+    transform: translate(0,0);
+    /* opacity: 1 ;  */
+}
+
+
+
+#panel-btn {
+  z-index: 999;
+  position: fixed;
+  bottom: 1vh;
+  right: 1vw;
+  width: 4rem;
+  height: 4rem;
+  border-radius:50% ;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-color);
+}
+
+
+.corazones{
+    color: blue;
+    cursor: pointer; 
+}
