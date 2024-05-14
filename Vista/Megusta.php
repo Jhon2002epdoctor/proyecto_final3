@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/Megusta.css">
+    <link rel="stylesheet" href="../estilo.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -17,20 +18,9 @@
 <body>
 
   <?php include "../components/navbar.php" ?>
-
   <div class="contenedor">
-    <input type="text" class="buscador" placeholder="Buscar...">
-    <div class="filtro">
-      <label for="filtro-select">Filtrar por:</label>
-      <select id="filtro-select" class="form-select">
-        <option value="opcion1">Opción 1</option>
-        <option value="opcion2">Opción 2</option>
-        <option value="opcion3">Opción 3</option>
-      </select>
-    </div>
     <div class="panel-contenedor">
-      <!-- Aquí se agregarán dinámicamente las tarjetas de productos o resultados de búsqueda -->
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-image-container">
           <img src="img/house-1836070_640.jpg" alt="Casa">
         </div>
@@ -51,7 +41,7 @@
           <i style="font-size: 18px" class="fa">&#xf095;</i>
           <button class="boton3">Contactar</button>
         </div>
-      </div>
+      </div> -->
  
     </div>
   </div>
@@ -62,6 +52,6 @@
 
   <?php include "../components/footer.php" ?>
 
-  <script src="../js/Megusta.js"></script>
+  <script type="module" src="../js/Megusta.js"></script>
 </body>
 </html>

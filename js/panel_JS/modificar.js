@@ -1,3 +1,5 @@
+import { convertFileToBase64 } from "../../common/ConVertirEnBase64.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const url = window.location.href;
   const urlObj = new URL(url);
@@ -6,36 +8,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   const botonModificar = document.querySelector(".Modificartotalmente");
   let imagenesArray = [];
   await MostrarCasa(id);
-   
-  document.getElementById("imagenes").addEventListener("change", async function(event) {
-    imagenesArray = [];  
-    const files = event.target.files;
-    
-  
-    await Promise.all(Array.from(files).map(file => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
 
-            reader.onload = function(e) {
-                imagenesArray.push(reader.result);  
-                resolve();  
-            };
-
-            reader.onerror = reject;  
-
-            reader.readAsDataURL(file);  
-        });
-    }));
-});
-
+  document.getElementById("imagenes").addEventListener("change", async function (event) {
+     imagenesArray = [];
+     const files = event.target.files;  
+     const imagenesPromeso  = Array.from(files).map((file) => {
+         return  convertFileToBase64(file); 
+     })
+     const base64Images = await Promise.all(imagenesPromeso);
+      imagenesArray  = base64Images.map(image => image.split(",")[1]);  
+    });
 
   botonModificar.addEventListener("click", async () => {
-    ModificarCasa(imagenesArray);
+    ModificarCasa(imagenesArray , id);
   });
 });
 
 async function MostrarCasa(id) {
-
   const descripcion = document.querySelector("textarea");
   const habitaciones = document.querySelector("#habitaciones");
   const titulo = document.querySelector("#titulo");
@@ -44,6 +33,8 @@ async function MostrarCasa(id) {
   const ciudad = document.querySelector("#ciudad");
   const destacado = document.querySelector("#destacado");
   const imagenes = document.querySelector(".imagenes-modificar");
+  const oculto = document.querySelector("#oculto");
+  let ckecked = ``; 
 
   await fetch(
     `http://localhost/proyecto_final/Modelo/panel_control/MostraCasaModificada.php?id=${id}`
@@ -58,12 +49,17 @@ async function MostrarCasa(id) {
         titulo.value = data[0].titulo;
         precio.value = data[0].precio;
         descripcion.value = data[0].descripcion;
-        destacado.value = data[0].destacado === 1 ? true : false;
-
+        destacado.checked = data[0].destacado === 1 ? true : false;
+        oculto.checked = data[0].oculto === 1 ? true : false;
+        
+      
         data[0].imagenes.forEach((img) => {
+          ckecked = img.oculto == 0 ? "" : "checked"
           imagenes.innerHTML += `  <div class="imagen-modificar">
                                         <img src="data:image/jpeg;base64,${img.imagen}" alt="imagen.">
-                                        <input type="checkbox" name="eliminar[]" value="${img.id}"> Eliminar
+                                        <label for="">Ocultar 
+                                           <input type="checkbox" name="eliminar[]"  ${ckecked}  value="${img.id}"> 
+                                        </label>
                                    </div>`;
         });
       }
@@ -71,24 +67,11 @@ async function MostrarCasa(id) {
     .catch((error) => console.error("Error:", error));
 }
 
-async function EliminarImagen(id) {
-  await fetch(
-    `http://localhost/proyecto_final/Vista/panel_control/EliminarImagen.php?id=${id}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
-}
+async function ModificarCasa(imagenesArray , id) {
 
-async function ModificarCasa(imagenesArray) {
-  const url = window.location.href;
-  const urlObj = new URL(url);
-  const params = new URLSearchParams(urlObj.search);
-  const id = params.get("id");
   const checkboxes = document.querySelectorAll(
-    'input[name="eliminar[]"]:checked'
-  );
+    'input[name="eliminar[]"]'
+  );  
   const descripcion = document.querySelector("textarea").value;
   const habitaciones = document.querySelector("#habitaciones").value;
   const titulo = document.querySelector("#titulo").value;
@@ -96,17 +79,19 @@ async function ModificarCasa(imagenesArray) {
   const comunidad = document.querySelector("#comunidad").value;
   const ciudad = document.querySelector("#ciudad").value;
   const destacado = document.querySelector("#destacado").checked;
+  const oculto = document.querySelector("#oculto").checked;
 
+  let valorCkeck = []
+  let valor = {
 
- 
-
-  const idsEliminar = Array.from(checkboxes).map((checkbox) => checkbox.value);
-
-  if (idsEliminar.length) {
-    idsEliminar.forEach((id) => async () => {
-      await EliminarImagen(id);
-    });
   }
+  // const idsEliminar = Array.from(checkboxes).map((checkbox) => ...valorCkeck );
+
+  for (let checkbox of checkboxes) {
+    valor = {checked:checkbox.checked  , dataId:checkbox.value}
+    valorCkeck.push(valor);
+  }
+
 
   const datosEnviar = {
     id: id,
@@ -118,8 +103,10 @@ async function ModificarCasa(imagenesArray) {
     ciudad: ciudad,
     destacado: destacado,
     imagenes: imagenesArray,
+    checkboxDataArray: valorCkeck,
+    oculto: oculto
   };
- console.log(datosEnviar);
+  console.log(datosEnviar);
   await fetch(
     `http://localhost/proyecto_final/Modelo/panel_control/Modificar.php?`,
     {

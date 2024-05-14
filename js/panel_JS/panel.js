@@ -1,41 +1,30 @@
+import { Paginacion } from "../../class/PaginacionClass.js";
+import { eliminarEspacios } from "../../common/EliminarEspacios.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
-  await llamartodasCasas();
+   let paginacion = new Paginacion(".panel-contenedor","#paginacion",3,InsertarCasas );
+   paginacion.IniciarEjecuccion("http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=todas" , {});
+
+  let buscadorInput = document.getElementById("buscador");
+  let timeout = null;
   BotonInsertarCasa();
   OcultarCasa();
-  let datos = [];
-  const radios = document.querySelectorAll(
-      'input[type="radio"][name="buscar"]'
-  );
-  const contenedorPanel = document.querySelector(".panel-contenedor");
-  const buscadorInput = document.getElementById("buscador");
-  let timeout = null;
-
-  radios.forEach((checkbox) => {
-      checkbox.addEventListener("change", function () {
-          buscadorInput.value = "";
-      });
+  buscadorInput.addEventListener("input", async () => {
+    clearTimeout(timeout);
+    let valorBuscador =   buscadorInput.value.trim();
+    let metodoBusqueda = document.getElementById("filtro").value;
+    timeout = setTimeout(async () => {
+      if (valorBuscador === "") {
+        let paginacion = new Paginacion(".panel-contenedor","#paginacion",3,InsertarCasas );
+        paginacion.IniciarEjecuccion("http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=todas" , {});      
+      } else {
+        await submitSearch(valorBuscador, metodoBusqueda);
+      }
+    }, 1000);
   });
+   
 
-  buscadorInput.addEventListener("input", async function (event) {
-      event.preventDefault();
-      let datos = [];
-      clearTimeout(timeout);
-      let valorBuscador = eliminarEspacios(buscadorInput.value);
-      timeout = setTimeout(async () => {
-          if (!valorBuscador || valorBuscador === "") {
-              llamartodasCasas();
-          } else {
-              radios.forEach(async (checkbox) => {
-                  if (checkbox.checked) {
-                      parametro = checkbox.value;
-                      datos = await submitSearch(buscadorInput.value, parametro);
-                      iniciarPaginacion(datos);
-                      event.preventDefault();
-                  }
-              });
-          }
-      }, 1000);
-  });
+
 });
 
 async function submitSearch(searchQuery, parametro) {
@@ -52,7 +41,7 @@ async function submitSearch(searchQuery, parametro) {
           if (!validacion) {
               buscadorInput.value = "";
               buscadorInput.placeholder = `Has seleccionado una búsqueda por ${parametro}, acepta solo números.`;
-              return [];
+              return "";
           }
           break;
       case "titulo":
@@ -62,45 +51,29 @@ async function submitSearch(searchQuery, parametro) {
           if (!validacion) {
               buscadorInput.value = "";
               buscadorInput.placeholder = `Has seleccionado una búsqueda por ${parametro}, acepta solo letras.`;
-              return [];
+              return "";
           }
        break;
   }
 
-  await fetch(
-      `http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=${parametro}&valor=${searchQuery}`
-  )
-      .then((response) => response.json())
-      .then((data) => {
-          datos = data;
-      })
-      .catch((error) => {
-          console.error("Error:", error);
-      });
-  return datos;
+//   await fetch(
+//       `http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=${parametro}&valor=${searchQuery}`
+//   )
+//       .then((response) => response.json())
+//       .then((data) => {
+//           datos = data;
+//       })
+//       .catch((error) => {
+//           console.error("Error:", error);
+//       });
+
+      let paginacion = new Paginacion(".panel-contenedor","#paginacion",3,InsertarCasas );
+      paginacion.IniciarEjecuccion(`http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=${parametro}&valor=${searchQuery}` , {});      
+
+  return "";
 }
 
-async function llamartodasCasas() {
-  const contenedorPanel = document.querySelector(".panel-contenedor");
-  await fetch(
-      "http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=todas"
-  )
-      .then((response) => response.json())
-      .then((data) => {
-         console.log(data);
-          iniciarPaginacion(data);
-      })
-      .catch((error) => {
-          console.error("Error:", error);
-      });
-}
-function iniciarPaginacion(datos) {
-  var tamPagina = 4; // Define cuántos elementos quieres por página
-  var totalPaginas = Math.ceil(datos.length / tamPagina);
 
-  mostrarPagina(1, tamPagina, datos);
-  agregarControlesPaginacion(1, totalPaginas , datos);
-}
 function InsertarCasas(datos) {
   const contenedorPanel = document.querySelector(".panel-contenedor");
   contenedorPanel.innerHTML = "";
@@ -149,37 +122,10 @@ function InsertarCasas(datos) {
           VerCasa();
           ModificarCasa();
           OcultarCasa();
+          BotonInsertarCasa();
       });
   }
 }
-function mostrarPagina(pagina, tamPagina, datos) {
-  var inicio = (pagina - 1) * tamPagina;
-  var fin = inicio + tamPagina;
-  var datosPaginados = datos.slice(inicio, fin);
-  InsertarCasas(datosPaginados)
-}
-
-function agregarControlesPaginacion(pagina, totalPaginas, datos) {
-  let datosAgregar  = []; 
-  datosAgregar = datos;
-  var contenedorPaginacion = document.getElementById('paginacion');
-  contenedorPaginacion.innerHTML = '';  
-
-  for (let i = 1; i <= totalPaginas; i++) {
-      var boton = document.createElement('button');
-
-      boton.textContent = i;
-      boton.className = pagina === i ? 'active' : ''; 
-      boton.addEventListener('click', () => {
-        let datosAgregar  = []; 
-        datosAgregar = datos;
-          mostrarPagina(i, 4, datosAgregar); 
-          agregarControlesPaginacion(i, totalPaginas, datosAgregar); 
-      });
-      contenedorPaginacion.appendChild(boton);
-  }
-}
-
 function VerCasa() {
   const botonesVer = document.querySelectorAll(".ver");
   botonesVer.forEach((boton) => {
@@ -189,7 +135,6 @@ function VerCasa() {
       });
   });
 }
-
 async function OcultarCasa() {
     document.querySelectorAll(".eliminar").forEach(boton => {
         // Asegurarse de que el evento solo se agregue una vez
@@ -213,7 +158,6 @@ async function OcultarCasa() {
         }
     });
 }
-
 function ModificarCasa() {
   const botonesModificar = document.querySelectorAll(".modificar");
   botonesModificar.forEach((boton) => {
@@ -223,13 +167,6 @@ function ModificarCasa() {
       });
   });
 }
-
-
-function eliminarEspacios(cadena) {
-  return cadena.replace(/\s+/g, '');
-}
-
-
 function BotonInsertarCasa(){
     const boton = document.querySelector(".boton-insertar");
     boton.addEventListener("click", function () {

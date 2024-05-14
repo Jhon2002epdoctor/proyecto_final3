@@ -1,18 +1,46 @@
+import { Paginacion } from "../class/PaginacionClass.js";
+import { Megusta, attachClickHandlers } from "../common/Inserccion.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
-  await llamartodasCasas();
-  const buscador = document.getElementById("filtro-select");
+  let paginacion = new Paginacion(".panel-contenedor","#paginacion",3,InsertarCasas );
+
+  await paginacion.IniciarEjecuccion(
+    "http://localhost/proyecto_final/Modelo/Buscador2.php",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        metodoBusqueda: "todos",
+        valorBuscador: "",
+      }),
+    }
+  );
+
+  const buscador = document.querySelector(".buscador");
   let timeout = null;
-  console.log(buscador);
   buscador.addEventListener("input", async () => {
     clearTimeout(timeout);
     let valorBuscador = buscador.value.trim();
-    let metodoBusqueda = document.getElementById("metodo-busqueda").value;
+    let metodoBusqueda = document.getElementById("filtro-select").value;
     timeout = setTimeout(async () => {
       if (valorBuscador === "") {
-        await llamartodasCasas();
+        await paginacion.IniciarEjecuccion(
+          "http://localhost/proyecto_final/Modelo/Buscador2.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              metodoBusqueda: "todos",
+              valorBuscador: "",
+            }),
+          }
+        );
       } else {
-        let datos = await submitSearch(valorBuscador, metodoBusqueda);
-        iniciarPaginacion(datos);
+        await submitSearch(valorBuscador, metodoBusqueda);
       }
     }, 1000);
   });
@@ -22,31 +50,34 @@ async function submitSearch(valorBuscador, metodoBusqueda) {
   let regex;
   let validacion;
   let datos = [];
+  let paginacion = new Paginacion(
+    ".panel-contenedor",
+    "#paginacion",
+    3,
+    InsertarCasas
+  );
 
-  datosEnviar = {
+  let datosEnviar = {
     metodoBusqueda: metodoBusqueda,
     valorBuscador: valorBuscador,
   };
-  const buscador = document.getElementById("buscador");
+  const buscador = document.querySelector(".buscador");
   switch (metodoBusqueda) {
     case "precio":
       regex = /^\d+$/;
       validacion = regex.test(valorBuscador);
       if (validacion) {
-        await fetch(`http://localhost/proyecto_final/Modelo/Buscador.php`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(datosEnviar),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            datos = data;
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+
+        await paginacion.IniciarEjecuccion(
+          "http://localhost/proyecto_final/Modelo/Buscador2.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datosEnviar),
+          }
+        );
       } else {
         buscador.value = "";
         buscador.placeholder = `Has seleccionado el precio solo hacepta números`;
@@ -56,20 +87,17 @@ async function submitSearch(valorBuscador, metodoBusqueda) {
       regex = /^[A-Za-z]+$/;
       validacion = regex.test(valorBuscador);
       if (validacion) {
-        await fetch(`http://localhost/proyecto_final/Modelo/Buscador.php`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(datosEnviar),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            datos = data;
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+       
+        await paginacion.IniciarEjecuccion(
+          "http://localhost/proyecto_final/Modelo/Buscador2.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datosEnviar),
+          }
+        );
       } else {
         buscador.value = "";
         buscador.placeholder = `Has seleccionado titulo solo acepta letras`;
@@ -80,25 +108,9 @@ async function submitSearch(valorBuscador, metodoBusqueda) {
   return datos;
 }
 
-async function llamartodasCasas() {
-  const contenedorPanel = document.querySelector(".panel-contenedor");
-  await fetch(
-    "http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=todas"
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      InsertarCasas(data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
 function InsertarCasas(datos) {
-  const panel = document.querySelector(".panel-contenedor");
-  panel.innerHTML = "";
-  console.log(datos);
-
+   let panel = document.querySelector(".panel-contenedor");
+   panel.innerHTML = "";
   if (datos.length) {
     datos.forEach((item) => {
       if (item.imagenes.length) {
@@ -126,7 +138,7 @@ function InsertarCasas(datos) {
                    </div>
                    <div class="icons-1 flex padding-top-10">
                        <p class="precio">${item.precio}$</p>
-                       <i style="font-size: 24px" class="fa ojo" data-id="${item.id}">&#xf06e;</i>
+                       <i style="font-size: 24px" class="fa ojo" data-id="${item.id_casa}">&#xf06e;</i>
                        ${corazonUsuario}
                    </div>
                    <div class="descripcion padding-top-10 padding-bottom-5">
@@ -141,46 +153,12 @@ function InsertarCasas(datos) {
                        <i style="font-size: 18px" class="fa">&#xf095;</i>
                        <button class="boton3"><a href="/proyecto_final/Vista/Conctato.php">Contactar</a> </button>
                    </div>
-               </div>        
+               </div>
                   `;
         }
       }
     });
   }
-}
-
-function iniciarPaginacion(datos) {
-  let tamPagina = 15;
-  let totalPaginas = Math.ceil(datos.length / tamPagina);
-
-  mostrarPagina(1, tamPagina, datos);
-  agregarControlesPaginacion(1, totalPaginas, datos);
-}
-
-function mostrarPagina(pagina, tamPagina, datos) {
-  var inicio = (pagina - 1) * tamPagina;
-  var fin = inicio + tamPagina;
-  var datosPaginados = datos.slice(inicio, fin);
-  InsertarCasas(datosPaginados);
-}
-
-function agregarControlesPaginacion(pagina, totalPaginas, datos) {
-  let datosAgregar = [];
-  datosAgregar = datos;
-  var contenedorPaginacion = document.getElementById("paginacion");
-  contenedorPaginacion.innerHTML = "";
-
-  for (let i = 1; i <= totalPaginas; i++) {
-    var boton = document.createElement("button");
-
-    boton.textContent = i;
-    boton.className = pagina === i ? "active" : "";
-    boton.addEventListener("click", () => {
-      let datosAgregar = [];
-      datosAgregar = datos;
-      mostrarPagina(i, 15, datosAgregar);
-      agregarControlesPaginacion(i, totalPaginas, datosAgregar);
-    });
-    contenedorPaginacion.appendChild(boton);
-  }
+  attachClickHandlers();
+  Megusta();
 }

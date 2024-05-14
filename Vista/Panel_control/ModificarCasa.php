@@ -111,7 +111,7 @@ if(isset($_SESSION['rol'])){
 
 <div class="contenedor">
     <h2>Modificar Propiedad</h2>
-<!-- 
+
 
      
         <label class="validarDescripcion"></label>
@@ -140,49 +140,24 @@ if(isset($_SESSION['rol'])){
 
         <label class="validarDestacado"></label>
         <label for="destacado">Propiedad Destacada:</label>
-        <input type="checkbox" id="destacado"  name="Destacado" > Marcar como destacado -->
+        <input type="checkbox" id="destacado"  name="Destacado" > Marcar como destacado 
 
-        <!-- <label class="validarOculto"></label>
+         <label class="validarOculto"></label>
         <label for="oculto">Oculto:</label>
-        <input type="checkbox" id="oculto" name="Oculto"> Marcar como oculto -->
+        <input type="checkbox" id="oculto" name="Oculto"> Marcar como oculto
 
-
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" rows="4" placeholder="Ingresa una descripción"></textarea> 
-
-    <label for="habitaciones">Habitaciones:</label>
-    <input type="number" id="habitaciones" placeholder="Cantidad de habitaciones">
-
-    <label for="titulo">Título:</label>
-    <input type="text" id="titulo" placeholder="Título de la propiedad">
-
-    <label for="precio">Precio:</label>
-    <input type="number" id="precio" placeholder="Precio en USD">
-
-    <label for="comunidad">Comunidad:</label>
-    <input type="text" id="comunidad" placeholder="Nombre de la comunidad">
-
-    <label for="ciudad">Ciudad:</label>
-    <input type="text" id="ciudad" placeholder="Nombre de la ciudad">
-
-    <label for="destacado">Propiedad Destacada:</label>
-    <input type="checkbox" id="destacado" > Marcar como destacado
 
     <div class="imagenes-modificar">
-        <!-- <div class="imagen-modificar">
-            <img src="imagen1.jpg" alt="Imagen 1"> 
-            <input type="checkbox" name="eliminar[]" value="1" data-id="2" > Eliminar
-        </div>
-        <div class="imagen-modificar">
-            <img src="imagen2.jpg" alt="Imagen 2">
-            <input type="checkbox" name="eliminar[]" value="2" data-id="3"> Eliminar
-        </div> -->
-        <!-- Puedes añadir más imágenes con el mismo patrón  -->
+     
     </div>
+<!-- 
+    <label for="">Ocultar 
+    <input type="checkbox" name="eliminar[]" checked value="${img.id}"> 
+    </label> -->
 
         <label class="validarImagenes"></label>
         <label for="imagenes">Agregar más imágenes:</label>
-        <input type="file" id="imagenes" name="Imagenes" multiple >
+        <input type="file" id="imagenes" class="imagenes" name="Imagenes" multiple >
 
     <button class="boton3  Modificartotalmente">Modificar</button>
 </div>

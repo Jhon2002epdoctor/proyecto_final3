@@ -3,7 +3,10 @@
 include '../../conexion.php';
 
 // Recibe el id_usuario desde una solicitud. Supongamos que se obtiene mediante POST.
-$id_usuario =  isset($_GET["id"])? $_GET["id"] : 0;
+  
+$data = json_decode(file_get_contents("php://input"));
+
+$id_usuario = $data->id_usuario ?? 0;
 
 if($id_usuario == 0){
     echo json_encode(['error' => 'No se proporcionó un ID de usuario válido.']);
@@ -38,23 +41,18 @@ GROUP BY
 $stmt = $conexion->prepare($query);
 
 if ($stmt) {
-    // Vincula el parámetro id_usuario a la consulta.
     $stmt->bind_param("i", $id_usuario);
 
-    // Ejecuta la consulta.
     $stmt->execute();
 
-    // Obtén el resultado.
     $result = $stmt->get_result();
 
-    // Verifica si hay resultados.
     $casas = [];
     if ($result->num_rows > 0) {
-        // Recorre los resultados.
         while ($row = $result->fetch_assoc()) {
-            // Divide las imágenes en un arreglo.
+      
             $imagenes = array_map(function ($imagen_str) {
-                // Divide cada imagen en id_imagen, imagen (base64) y ocultoImagen.
+                
                 list($id_imagen, $imagen_base64, $oculto) = explode(':', $imagen_str);
                 return [
                     'id_imagen' => (int) $id_imagen,
@@ -63,7 +61,7 @@ if ($stmt) {
                 ];
             }, explode(',', $row['imagenes']));
 
-            // Agrega los datos de la casa al arreglo final.
+          
             $casas[] = [
                 'id_casa' => $row['id_casa'],
                 'descprcion' => $row['descprcion'],
@@ -78,21 +76,26 @@ if ($stmt) {
             ];
         }
     }
+    else{
+        $casas = [
+            'message' => 'No se encontraron casas.',
+        ];
+    }
 
-    // Cierra la sentencia.
+
     $stmt->close();
 } else {
-    // Si la sentencia no se pudo preparar, maneja el error.
+   
     $casas = [
-        'error' => 'Error al preparar la consulta: ' . $conexion->error,
+        'message' => 'Error al preparar la consulta: ' . $conexion->error,
     ];
 }
 
-// Configura los encabezados de respuesta.
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-// Devuelve la información en formato JSON.
+
 echo json_encode($casas);
 
 ?>

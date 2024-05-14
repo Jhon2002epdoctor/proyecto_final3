@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/busacador.css">
+    <link rel="stylesheet" href="../estilo.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -23,9 +24,8 @@
     <div class="filtro">
       <label for="filtro-select">Filtrar por:</label>
       <select id="filtro-select" class="form-select">
-        <option value="opcion1">Opción 1</option>
-        <option value="opcion2">Opción 2</option>
-        <option value="opcion3">Opción 3</option>
+        <option value="titulo">Titulo</option>
+        <option value="precio">Precio</option>
       </select>
     </div>
     <div class="panel-contenedor">
@@ -128,6 +128,6 @@
 
   <?php include "../components/footer.php" ?>
 
-  <script src="../js/Buscador.js"></script>
+  <script type="module" src="../js/Buscador.js"></script>
 </body>
 </html>

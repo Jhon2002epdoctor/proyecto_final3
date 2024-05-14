@@ -1,53 +1,77 @@
+import { Paginacion } from "../class/PaginacionClass.js";
+import { Megusta, attachClickHandlers } from "../common/Inserccion.js";
+
 document.addEventListener("DOMContentLoaded" ,  async () => {
 
 
-  //  let id = localStorage .getItem("id");
+   let id = localStorage .getItem("id");
 
+  let paginacion = new Paginacion(".panel-contenedor", "#paginacion", 3, InsertarCasas);
 
-  //  await fetch(`http://localhost/proyecto_final/Modelo/llamadas/Megustallamada.php?id=${id}`,{
-  //   method: "GET",
-  //   headers: {
-  //      "Content-Type": "application/json",
-  //   },
-  // }).then( response => response.json()).then((data) => {
-  //   console.log(data);
-  //   InsertarCasas(data)
-  // })
-   
+  paginacion.IniciarEjecuccion("http://localhost/proyecto_final/Modelo/llamadas/Megustallamada.php",   {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({id_usuario:id}),
+  })
   
 })
 
 
 
 
-function InsertarCasas(datos){
-    if(datos.length){
-        const panel = document.querySelector(".panel-contenedor");
-        panel.innerHTML = "";
-        datos.forEach((item) => {
-          panel.innerHTML += `
-              <div class="card">
-              <img src="data:image/jpeg;base64,${item.imagenes[0].imagen}" alt="Imagen" style="max-width: 100%; height: auto;">
+function InsertarCasas(datos) {
+  let panel = document.querySelector(".panel-contenedor");
+  panel.innerHTML = "";
+ if (datos.length) {
+   datos.forEach((item) => {
+     if (item.imagenes.length) {
+       let imagenPrincipal = "";
+       for (const imagen of item.imagenes) {
+         if (imagen.ocultoImagen == 0) {
+           imagenPrincipal = imagen.imagen;
+           break;
+         }
+       }
+
+       if (imagenPrincipal != "") {
+         let id = localStorage.getItem("id");
+         let corazonUsuario = ``;
+
+         if (id) {
+           corazonUsuario = `<i style="font-size: 24px" class="fa corazon" data-id="${item.id}">&#xf004;</i>`;
+         } else {
+           corazonUsuario = `<i style="font-size: 24px" class="fa " data-id="${item.id}" >&#xf004;</i>`;
+         }
+         panel.innerHTML += `
+             <div class="card">
+                  <div class="card-image-container">
+                  <img src="data:image/jpeg;base64,${imagenPrincipal}" alt="Imagen" ">
+                  </div>
                   <div class="icons-1 flex padding-top-10">
-                    <p class="precio">$${item.precio}</p>
-                    <i style="font-size: 24px" class="fa ojo" data-id="${item.id}">&#xf06e;</i>
-                    <i style="font-size: 24px" class="fa corazon" data-id="${item.id}"  >&#xf004;</i>
+                      <p class="precio">${item.precio}$</p>
+                      <i style="font-size: 24px" class="fa ojo" data-id="${item.id_casa}">&#xf06e;</i>
+                      ${corazonUsuario}
                   </div>
                   <div class="descripcion padding-top-10 padding-bottom-5">
-                    ${item.descripcion}
+                       ${item.titulo}
                   </div>
                   <div class="icons-2 flex padding-top-10">
-                    <i style="font-size: 24px" class="fa">&#xf236;</i> 1
-                    <i style="font-size: 24px" class="fa">&#xf2cc;</i> 2
-                    <i style="font-size: 24px" class="fas">&#xf1ad;</i> 3
+                      <i style="font-size: 18px" class="fa">&#xf236;</i> ${item.habitaciones}
+                      <i style="font-size: 18px" class="fa">&#xf2cc;</i> 2
+                      <i style="font-size: 18px" class="fas">&#xf1ad;</i> 3
                   </div>
                   <div class="icons-3 flex padding-bottom-10 padding-top-10">
-                    <i style="font-size: 24px" class="fa">&#xf095;</i>
-                    <button class="boton3">Conectar</button>
+                      <i style="font-size: 18px" class="fa">&#xf095;</i>
+                      <button class="boton3"><a href="/proyecto_final/Vista/Conctato.php">Contactar</a> </button>
                   </div>
-                </div>`;
-        });  
-      
-    } 
-  }
-  
+              </div>
+                 `;
+       }
+     }
+   });
+ }
+ attachClickHandlers();
+ Megusta();
+}

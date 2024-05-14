@@ -36,40 +36,59 @@ if(isset($_SESSION['rol'])){
 }
 ?>
            
-             <div> 
-                 <button class="boton-insertar">Insertar Casa</button>
-             </div>
-        <div class="contenedor">
-                  <input type="tel" name="" class="buscador" id="buscador" placeholder="Buscador">
-                  <div class="filtro">
-                       <div class="flex-center">
-                          <p>id</p>
-                          <input type="radio" name="buscar" value="id_busqueda" id="id_busqueda" checked >
-                       </div>
-                       <div class="flex-center">
-                          <p>precio</p>
-                          <input type="radio" name="buscar" value="precio" id="">
-                       </div>
-                       <div class="flex-center">
-                          <p>titulo</p>
-                          <input type="radio" name="buscar"  value="titulo" id="">
-                       </div>
-                       <div class="flex-center">
-                          <p>comunidad</p>
-                          <input type="radio" name="buscar" value="comunidad" id="">
-                       </div>
-                       <div class="flex-center">
-                          <p>imagenes</p>
-                          <input type="radio" name="buscar" value="imagenes" id="">
-                       </div>
-                  </div> 
-                <div id="contenedor-tarjetas" class="panel-contenedor">
-                         
+           <div class="contenedor">
+        <button class="boton-insertar">Insertar Casa</button>
+        
+        <input type="tel" name="" class="buscador" id="buscador" placeholder="Buscador">
+        
+        <div class="flex-center">
+            <select id="filtro" class="filtro-select">
+                <option value="id_busqueda">ID</option>
+                <option value="precio">Precio</option>
+                <option value="titulo">Título</option>
+                <option value="comunidad">Comunidad</option>
+                <option value="imagenes">Imágenes</option>
+            </select>
+        </div>
+        
+        <div id="contenedor-tarjetas" class="panel-contenedor">
+            <div class="casa-panel">
+                <div class="id-panel">
+                    <p>ID</p>
+                    <p>12</p>
                 </div>
-                <div id="paginacion"></div>
+                <div class="precio-panel">
+                    <p>Precio</p>
+                    <p>0$</p>
+                </div>
+                <div class="titulo-panel">
+                    <p>Título</p>
+                    <p></p>
+                </div>
+                <div class="comunidad-panel">
+                    <p>Comunidad Autónoma</p>
+                    <p>Alicante</p>
+                </div>
+                <div class="img-panel">
+                    <p>Imágenes</p>
+                    <p>5</p>
+                </div>
+                <div class="botones">
+                    <p>Botones</p>
+                    <div class="boton">
+                        <button class="modificar" data-id="12">Modificar</button>
+                        <button class="eliminar" data-id="12" data-listener="true">Ocultar</button>
+                        <button class="ver" id="toggleButton" data-id="12">Ver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="paginacion"></div>
+    </div>
         
         </div>
-    <script src="../../js/panel_JS/panel.js"> </script>
+    <script type="module" src="../../js/panel_JS/panel.js"> </script>
    <?php include "../../components/footer.php" ?>
 </body>
 </html>

@@ -5,14 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("propertyForm");
   let validacion = { estado: true };
   let valores = {};
-
+  
   modificarBtn.addEventListener("click", async (event) => {
     event.preventDefault();
     const inputs = document.querySelectorAll("input");
     const texarea = document.getElementById("descripcion");
     let seccion = document.querySelector(".validarDescripcion");
     seccion.innerHTML = "";  
-
 
     if (texarea.value.trim() === "") {
       seccion.innerHTML = "Introduce una descripción";
@@ -45,8 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(valores),
         });
         
-        if (response.ok) {
-
+        if (response.success) {
           form.reset();  
         } else {
   
@@ -68,4 +66,5 @@ document.addEventListener("DOMContentLoaded", () => {
       reader.onerror = (error) => reject(error);
     });
   }
+  
 });

@@ -29,7 +29,7 @@ try {
         $id_casa_insertada = $conexion->insert_id;
     // Insertar nuevas imágenes
 
-    if(count($imagenes) != 0){
+    // if(count($imagenes) != 0){
 
     $sql_insert_imagen = "INSERT INTO `imagenes` (`imagen`, `id_casa`, `ocultoImagen`) VALUES (?, ?, ?)";
     $stmt_insert = $conexion->prepare($sql_insert_imagen);
@@ -39,7 +39,7 @@ try {
         $stmt_insert->execute();
     }
     $stmt_insert->close();
-   } 
+//    } 
     // Confirmar la transacción
     $conexion->commit();
     $response = ["success" => true, "message" => "Casa modificada correctamente"];

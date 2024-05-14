@@ -1,82 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paginado en JavaScript</title>
-  <style>
-    .container {
-      width: 80%;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .pagination {
-      margin-top: 20px;
-    }
-    .pagination button {
-      margin: 0 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-    .active {
-      background-color: #ccc;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="content"></div>
-    <div class="pagination"></div>
-  </div>
 
-  <script>
-    // Datos de ejemplo (aquí deberías obtener los datos de tu API)
-    const data = Array.from({ length: 50 }, (_, index) => index + 1);
 
-    // Configuración del paginado
-    const itemsPerPage = 10;
-    let currentPage = 1;
 
-    // Función para mostrar los elementos de la página actual
-    function displayItems(page) {
-      const content = document.querySelector('.content');
-      content.innerHTML = '';
 
-      const startIndex = (page - 1) * itemsPerPage;
-      const endIndex = page * itemsPerPage;
 
-      const items = data.slice(startIndex, endIndex);
-      items.forEach(item => {
-        const div = document.createElement('div');
-        div.textContent = `Item ${item}`;
-        content.appendChild(div);
-      });
-    }
 
-    // Función para generar los botones de paginación
-    function renderPagination() {
-      const pagination = document.querySelector('.pagination');
-      pagination.innerHTML = '';
+<!-- Buscador.php -->
+<div class="card">
+        <div class="card-image-container">
+          <img src="img/house-1836070_640.jpg" alt="Casa">
+        </div>
+        <div class="icons-1 flex padding-top-10">
+          <p class="precio">3000$</p>
+          <i style="font-size: 18px" class="fa">&#xf06e;</i>
+          <i style="font-size: 18px" class="fa">&#xf004;</i>
+        </div>
+        <div class="descripcion padding-top-10 padding-bottom-5">
+          La Casa de tus sueños está aquí. La verdad es que es una gran oportunidad. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi quas nam voluptatem quia. Dolorem eius voluptatibus hic obcaecati aliquid eaque optio non. Illum odit eligendi temporibus fugiat corporis vitae soluta!
+        </div>
+        <div class="icons-2 flex padding-top-10">
+          <i style="font-size: 18px" class="fa">&#xf236;</i> 1
+          <i style="font-size: 18px" class="fa">&#xf2cc;"></i> 2
+          <i style="font-size: 18px" class="fas">&#xf1ad;</i> 3
+        </div>
+        <div class="icons-3 flex padding-bottom-10 padding-top-10">
+          <i style="font-size: 18px" class="fa">&#xf095;</i>
+          <button class="boton3">Contactar</button>
+        </div>
+</div>
 
-      const totalPages = Math.ceil(data.length / itemsPerPage);
-      for (let i = 1; i <= totalPages; i++) {
-        const button = document.createElement('button');
-        button.textContent = i;
-        if (i === currentPage) {
-          button.classList.add('active');
-        }
-        button.addEventListener('click', () => {
-          currentPage = i;
-          displayItems(currentPage);
-          renderPagination();
-        });
-        pagination.appendChild(button);
-      }
-    }
+ <!-- index2.ph -->
 
-    // Mostrar la página inicial
-    displayItems(currentPage);
-    renderPagination();
-  </script>
-</body>
-</html>
+ <div class="card">
+                <div class="card-image-container">
+                    <img src="img/house-1836070_640.jpg" alt="Casa">
+                </div>
+                <div class="icons-1 flex padding-top-10">
+                    <p class="precio">3000$</p>
+                    <i style="font-size: 18px" class="fa">&#xf06e;"></i>
+                    <i style="font-size: 18px" class="fa">&#xf004;"></i>
+                </div>
+                <div class="descripcion padding-top-10 padding-bottom-5">
+                    La Casa de tus sueños está aquí. La verdad es que es una gran oportunidad.
+                </div>
+                <div class="icons-2 flex padding-top-10">
+                    <i style="font-size: 18px" class="fa">&#xf236;   </i> 1
+                    <i style="font-size: 18px" class="fa">&#xf2cc;"></i> 2
+                    <i style="font-size: 18px" class="fas">&#xf1ad;"></i> 3
+                </div>
+                <div class="icons-3 flex padding-bottom-10 padding-top-10">
+                    <i style="font-size: 18px" class="fa">&#xf095;"></i>
+                    <button class="boton3">Contactar</button>
+                </div>
+</div>
+
+<!-- Megusta.php  -->
+
+<div class="card">
+        <div class="card-image-container">
+          <img src="img/house-1836070_640.jpg" alt="Casa">
+        </div>
+        <div class="icons-1 flex padding-top-10">
+          <p class="precio">3000$</p>
+          <i style="font-size: 18px" class="fa">&#xf06e;</i>
+          <i style="font-size: 18px" class="fa">&#xf004;</i>
+        </div>
+        <div class="descripcion padding-top-10 padding-bottom-5">
+          La Casa de tus sueños está aquí. La verdad es que es una gran oportunidad. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi quas nam voluptatem quia. Dolorem eius voluptatibus hic obcaecati aliquid eaque optio non. Illum odit eligendi temporibus fugiat corporis vitae soluta!
+        </div>
+        <div class="icons-2 flex padding-top-10">
+          <i style="font-size: 18px" class="fa">&#xf236;</i> 1
+          <i style="font-size: 18px" class="fa">&#xf2cc;"></i> 2
+          <i style="font-size: 18px" class="fas">&#xf1ad;</i> 3
+        </div>
+        <div class="icons-3 flex padding-bottom-10 padding-top-10">
+          <i style="font-size: 18px" class="fa">&#xf095;</i>
+          <button class="boton3">Contactar</button>
+        </div>
+</div>

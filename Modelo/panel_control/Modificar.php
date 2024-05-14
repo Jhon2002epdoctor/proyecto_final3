@@ -1,10 +1,8 @@
 
 <?php
-include '../../conexion.php'; // Asegúrate de incluir el archivo de conexión.
+include '../../conexion.php'; 
 
-// Recibe los datos enviados desde JavaScript.
 $data = json_decode(file_get_contents("php://input"));
-
 
 $id = $data->id;
 $descripcion = $data->descripcion;
@@ -16,11 +14,12 @@ $ciudad = $data->ciudad;
 $destacado = $data->destacado ? 1 : 0;
 $imagenes = $data->imagenes;
 $idsOcultar = $data->checkboxDataArray;
+$oculto = $data->oculto ? 1 : 0;
 
 
-$updateCasaQuery = "UPDATE casa SET descprcion = ?, habitaciones = ?, titulo = ?, precio = ?, comunidad_autonoma = ?, ciudad = ?, destacado = ? WHERE id_casa = ?";
+$updateCasaQuery = "UPDATE casa SET descprcion = ?, habitaciones = ?, titulo = ?, precio = ?, comunidad_autonoma = ?, ciudad = ?, destacado = ? , oculto = ? WHERE id_casa = ?" ;
 $stmtCasa = $conexion->prepare($updateCasaQuery);
-$stmtCasa->bind_param("sisdsisi", $descripcion, $habitaciones, $titulo, $precio, $comunidad, $ciudad, $destacado, $id);
+$stmtCasa->bind_param("sisdsssii", $descripcion, $habitaciones, $titulo, $precio, $comunidad, $ciudad, $destacado,$oculto,$id);
 
 
 if ($stmtCasa->execute()) {
@@ -46,7 +45,6 @@ if ($stmtCasa->execute()) {
   $stmtImagen->close();
     $response = ["success" => true, "message" => "Casa y/o imágenes modificadas correctamente"];
 } else {
-    // Respuesta de error.
     $response = ["success" => false, "message" => "Error al actualizar los datos de la casa"];
 }
 

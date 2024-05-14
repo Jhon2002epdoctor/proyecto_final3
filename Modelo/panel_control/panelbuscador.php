@@ -225,7 +225,7 @@
         }
 
             
-     $result_final =   isset($casas[0]["titulo"]) ? $casas : array();
+     $result_final = isset($casas[0]["titulo"]) ? $casas : ["message" => "No se encontraron casas."];
      
     header("Content-Type: application/json"); 
     echo json_encode($result_final);

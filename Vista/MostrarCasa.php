@@ -37,7 +37,18 @@
                     </svg>
                 </section>
                 <section  class="icons-casa">
-                        
+                <div class="icon-casa">
+                        <p>Habitaciones</p>
+                        <i style="font-size:24px" class="fa">&#xf236;</i>
+                    </div>
+                    <div class="icon-casa">
+                        <p>Baños</p>
+                        <i class="fa fa-bath" style="font-size:24px"></i>
+                    </div>
+                    <div class="icon-casa">
+                        <p>m2</p>
+                        <i style='font-size:24px' class='far'>&#xf1ad;</i>
+                    </div>
                 </section>
                 <section class="descripcion">
                     <h2>Descripción</h2>
