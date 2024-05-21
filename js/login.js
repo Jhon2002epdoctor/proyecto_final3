@@ -3,8 +3,11 @@ import { validarInput } from "../common/validaciones.js";
 document.addEventListener("DOMContentLoaded", () => {
 
   const submit = document.getElementById("submit");
+  
 
   submit.addEventListener("click", async (event) => {
+    const  errorLogin =  document.querySelector(".errorlogin"); 
+    errorLogin.innerHTML = "";  
     event.preventDefault();
 
     let validacion = {estado: true} ; 
@@ -32,6 +35,7 @@ async function login(valores) {
   )
     .then((response) => response.json())
     .then((data) => {
+        
       let verificado = data.verificado ?? "";
       if (verificado == "verificado") {
         localStorage.setItem("id", data.id);
@@ -41,48 +45,10 @@ async function login(valores) {
          const  errorLogin =  document.querySelector(".errorlogin"); 
          errorLogin.style.color = "red";
          errorLogin.style.fontSize = "15px";
-         errorLogin.innerHTML = "usuario o contraseña incorrectos.";
+         errorLogin.innerHTML = "usuario o contraseña incorrectos";
       }
     })
     .catch((error) => console.error("Error:", error));
 }
 
 
-
-// function validarInput(input , validacion) {
-//     const valor = input.value.trim();
-   
-//    let valido =   document.querySelector(`.validar${input.name}`); 
-//    valido.innerHTML = "";
-//   switch (input.type) {
-//       case "text":
-//           if (valor === "") {
-//               valido.innerHTML = "Introduce un " + input.name;
-//               valido.style.color = "red";
-//               validacion.estado= false;
-//           }
-//           break;
-//       case "password":
-//           if (valor === "") {
-//             valido.innerHTML = "Introduce una contraseña";
-//             valido.style.color = "red";
-//             validacion.estado= false;
-//           }
-//           break;
-//       case "email":
-//           if (valor === "" || !valor.includes("@")) {
-//               valido.innerHTML= "Introduce un correo válido";
-//               valido.style.color = "red";
-//               validacion.estado= false;
-//           }
-//           else if (!valor.includes("@")) {
-//               valido.innerHTML = "Introduce @ en la dirección de correo";
-//               valido.style.color = "red";
-//               validacion.estado= false;
-//           }
-//           break;
-//       default:
-//           break;
-//   }
-
-// }

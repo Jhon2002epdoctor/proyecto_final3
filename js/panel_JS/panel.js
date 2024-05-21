@@ -3,7 +3,11 @@ import { eliminarEspacios } from "../../common/EliminarEspacios.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
    let paginacion = new Paginacion(".panel-contenedor","#paginacion",3,InsertarCasas );
-   paginacion.IniciarEjecuccion("http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=todas" , {});
+   paginacion.IniciarEjecuccion("/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=todas" , {});
+ 
+  await  DatosEstadisticas().then(data => {
+      MostrarEstadistica(data);
+   })
 
   let buscadorInput = document.getElementById("buscador");
   let timeout = null;
@@ -16,9 +20,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     timeout = setTimeout(async () => {
       if (valorBuscador === "") {
         let paginacion = new Paginacion(".panel-contenedor","#paginacion",3,InsertarCasas );
-        paginacion.IniciarEjecuccion("http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=todas" , {});      
+        paginacion.IniciarEjecuccion("/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=todas" , {});      
       } else {
-        await submitSearch(valorBuscador, metodoBusqueda);
+        await submitSearch(eliminarEspacios(valorBuscador),metodoBusqueda);
       }
     }, 1000);
   });
@@ -55,17 +59,6 @@ async function submitSearch(searchQuery, parametro) {
           }
        break;
   }
-
-//   await fetch(
-//       `http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=${parametro}&valor=${searchQuery}`
-//   )
-//       .then((response) => response.json())
-//       .then((data) => {
-//           datos = data;
-//       })
-//       .catch((error) => {
-//           console.error("Error:", error);
-//       });
 
       let paginacion = new Paginacion(".panel-contenedor","#paginacion",3,InsertarCasas );
       paginacion.IniciarEjecuccion(`http://localhost/proyecto_final/Modelo/panel_control/panelbuscador.php?opcion=${parametro}&valor=${searchQuery}` , {});      
@@ -131,7 +124,7 @@ function VerCasa() {
   botonesVer.forEach((boton) => {
       boton.addEventListener("click", function () {
           const id = this.getAttribute("data-id");
-          window.location.href = `http://localhost/proyecto_final/Vista/panel_control/MostrasCasa.php?id=${id}`;
+          window.location.href = `/proyecto_final/Vista/panel_control/MostrasCasa.php?id=${id}`;
       });
   });
 }
@@ -163,7 +156,7 @@ function ModificarCasa() {
   botonesModificar.forEach((boton) => {
       boton.addEventListener("click", function () {
           const id = this.getAttribute("data-id");
-          window.location.href = `http://localhost/proyecto_final/Vista/panel_control/ModificarCasa.php?id=${id}`;
+          window.location.href = `/proyecto_final/Vista/panel_control/ModificarCasa.php?id=${id}`;
       });
   });
 }
@@ -174,3 +167,55 @@ function BotonInsertarCasa(){
     });
 }
 
+
+
+async function DatosEstadisticas(){
+ const ctx = document.getElementById('myChart');
+    let dataResponsive = {}; 
+   await  fetch("/Proyecto_final/Modelo/Estadisticas.php")
+     .then((response) => response.json())
+     .then((data) => {
+        dataResponsive = data; 
+     })
+  
+      return dataResponsive ; 
+
+}
+
+
+function MostrarEstadistica(data){
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Casas', 'Fotos', 'Me gusta', 'Usuarios'],
+            datasets: [{
+                label: '# of Items',
+                data: [data.total_casas, data.total_fotos, data.total_megusta, data.total_usuarios],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}

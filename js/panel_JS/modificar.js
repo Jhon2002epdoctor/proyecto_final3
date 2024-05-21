@@ -37,7 +37,7 @@ async function MostrarCasa(id) {
   let ckecked = ``; 
 
   await fetch(
-    `http://localhost/proyecto_final/Modelo/panel_control/MostraCasaModificada.php?id=${id}`
+    `/proyecto_final/Modelo/panel_control/MostraCasaModificada.php?id=${id}`
   )
     .then((response) => response.json())
     .then(async (data) => {
@@ -80,18 +80,13 @@ async function ModificarCasa(imagenesArray , id) {
   const ciudad = document.querySelector("#ciudad").value;
   const destacado = document.querySelector("#destacado").checked;
   const oculto = document.querySelector("#oculto").checked;
-
   let valorCkeck = []
-  let valor = {
-
-  }
-  // const idsEliminar = Array.from(checkboxes).map((checkbox) => ...valorCkeck );
+  let valor = {}
 
   for (let checkbox of checkboxes) {
     valor = {checked:checkbox.checked  , dataId:checkbox.value}
     valorCkeck.push(valor);
   }
-
 
   const datosEnviar = {
     id: id,
@@ -108,7 +103,7 @@ async function ModificarCasa(imagenesArray , id) {
   };
   console.log(datosEnviar);
   await fetch(
-    `http://localhost/proyecto_final/Modelo/panel_control/Modificar.php?`,
+    `/proyecto_final/Modelo/panel_control/Modificar.php?`,
     {
       method: "POST",
       headers: {

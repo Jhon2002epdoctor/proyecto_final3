@@ -157,7 +157,7 @@
                 </div>
         </div> -->
 
-        <div class="card">
+        <!-- <div class="card">
                 <div class="card-image-container">
                     <img src="img/modelo-version-pequeña.jpg" alt="Casa">
                 </div>
@@ -247,7 +247,8 @@
                 </div>
           </div>
           <div class="card">
-                <div class="card-image-container">
+-->
+                <!-- <div class="card-image-container">
                     <img src="img/house-1836070_640.jpg" alt="Casa">
                 </div>
                 <div class="icons-1 flex padding-top-10">
@@ -268,7 +269,7 @@
                     <i style="font-size: 18px" class="fa">&#xf095;"></i>
                     <button class="boton3">Contactar</button>
                 </div>
-            </div>
+            </div> -->
             <div class="card">
                 <div class="card-image-container">
                     <img src="img/house-1836070_640.jpg" alt="Casa">
@@ -290,10 +291,10 @@
                     <i style="font-size: 18px" class="fa">&#xf095;"></i>
                     <button class="boton3">Contactar</button>
                 </div>
-            </div>
+            </div> 
   </div>
 
-  <div class="paginacion">
+  <div  id="paginacion" class="paginacion">
 
   </div>
 

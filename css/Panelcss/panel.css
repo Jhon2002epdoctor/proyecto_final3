@@ -108,3 +108,16 @@ body {
         width: 100%;
     }
 }
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Ajusta esto según tus necesidades */
+    height: 500px; /* Incrementa la altura según tus necesidades */
+    margin: 0 auto;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}

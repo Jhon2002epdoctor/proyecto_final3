@@ -14,7 +14,7 @@ async function MostrarCasa(id) {
   const icons_casa = document.querySelector(".icons-casa");
 
   await fetch(
-    `http://localhost/proyecto_final/Modelo/llamadas/MostrarCasa.php?id=${id}`
+    `/proyecto_final/Modelo/llamadas/MostrarCasa.php?id=${id}`
   )
     .then((response) => response.json())
     .then(async (data) => {

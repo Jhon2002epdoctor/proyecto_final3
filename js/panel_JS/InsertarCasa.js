@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const base64Images = await Promise.all(imagePromises);
         valores["imagenes"] = base64Images.map(image => image.split(",")[1]); 
 
-        const response = await fetch("http://localhost/proyecto_final/Modelo/panel_control/InsertarCasa.php", {
+        const response = await fetch("/proyecto_final/Modelo/panel_control/InsertarCasa.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(valores),

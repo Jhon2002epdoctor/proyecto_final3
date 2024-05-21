@@ -25,7 +25,9 @@
 
 <div class="contenedor">
   <div class="formulario">
+         
         <form>
+          <label for="" class="errorlogin"></label>
             <label class="validarUsuario"></label>
             <label for="usuario">Usuario:</label>
             <input type="text" id="usuario" name="Usuario" required>

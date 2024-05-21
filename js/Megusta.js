@@ -2,13 +2,11 @@ import { Paginacion } from "../class/PaginacionClass.js";
 import { Megusta, attachClickHandlers } from "../common/Inserccion.js";
 
 document.addEventListener("DOMContentLoaded" ,  async () => {
-
-
    let id = localStorage .getItem("id");
 
   let paginacion = new Paginacion(".panel-contenedor", "#paginacion", 3, InsertarCasas);
 
-  paginacion.IniciarEjecuccion("http://localhost/proyecto_final/Modelo/llamadas/Megustallamada.php",   {
+  paginacion.IniciarEjecuccion("/proyecto_final/Modelo/llamadas/Megustallamada.php",   {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

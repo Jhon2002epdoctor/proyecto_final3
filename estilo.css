@@ -79,3 +79,33 @@ p{
     background-color: red !important;
     border-color: rgba(0, 0, 0, 0.1);
 }
+
+#paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  #paginacion button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  }
+
+  #paginacion button:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+  }
+
+  #paginacion button.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+  }

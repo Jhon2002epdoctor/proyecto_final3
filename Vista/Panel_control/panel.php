@@ -86,9 +86,15 @@ if(isset($_SESSION['rol'])){
         
         <div id="paginacion"></div>
     </div>
-        
+
+    <div  class="chart-container" >
+        <canvas id="myChart"></canvas>
+    </div>
+           
+
         </div>
-    <script type="module" src="../../js/panel_JS/panel.js"> </script>
    <?php include "../../components/footer.php" ?>
+   <script type="module" src="../../js/panel_JS/panel.js"> </script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

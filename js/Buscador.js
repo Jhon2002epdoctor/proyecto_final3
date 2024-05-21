@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let paginacion = new Paginacion(".panel-contenedor","#paginacion",3,InsertarCasas );
 
   await paginacion.IniciarEjecuccion(
-    "http://localhost/proyecto_final/Modelo/Buscador2.php",
+    "/proyecto_final/Modelo/Buscador2.php",
     {
       method: "POST",
       headers: {
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     timeout = setTimeout(async () => {
       if (valorBuscador === "") {
         await paginacion.IniciarEjecuccion(
-          "http://localhost/proyecto_final/Modelo/Buscador2.php",
+          "/proyecto_final/Modelo/Buscador2.php",
           {
             method: "POST",
             headers: {
@@ -69,7 +69,7 @@ async function submitSearch(valorBuscador, metodoBusqueda) {
       if (validacion) {
 
         await paginacion.IniciarEjecuccion(
-          "http://localhost/proyecto_final/Modelo/Buscador2.php",
+          "/proyecto_final/Modelo/Buscador2.php",
           {
             method: "POST",
             headers: {
@@ -89,7 +89,7 @@ async function submitSearch(valorBuscador, metodoBusqueda) {
       if (validacion) {
        
         await paginacion.IniciarEjecuccion(
-          "http://localhost/proyecto_final/Modelo/Buscador2.php",
+          "/proyecto_final/Modelo/Buscador2.php",
           {
             method: "POST",
             headers: {

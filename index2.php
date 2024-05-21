@@ -16,9 +16,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/img_index.css">
-    <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
       

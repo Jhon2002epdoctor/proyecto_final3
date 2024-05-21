@@ -1,3 +1,9 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
 .header {
     width: 100%;
     height: 120px;
@@ -5,80 +11,102 @@
     top: 0;
     background-color: white;
     z-index: 999;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav, .nav ul {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
 }
 
 .nav {
     width: 100%;
+    padding: 0 20px;
 }
 
 .nav ul {
-    gap: 70px;
-    padding: 0; 
+    gap: 20px;
+    padding: 0;
     margin: 0;
+    list-style: none;
 }
 
 .nav ul li {
-   font: 700 18.5px Verdana, Geneva, Tahoma, sans-serif; /* Shorthand para font */
-   color: #1f386e;
+    font: 700 18px Verdana, Geneva, Tahoma, sans-serif;
+    color: #1f386e;
 }
 
-.logo img{
-    width: 100%;
-    height: 120px;
+.nav ul li a {
+    text-decoration: none;
+    color: inherit;
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav ul li a:hover {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.logo img {
+    height: 80px;
+    width: auto;
 }
 
 .menu_despegable {
     display: none;
 }
 
-.megusta{
+.megusta {
     padding-right: 40px;
 }
 
-.menu_despegable{
+.menu_despegable {
     padding-right: 40px;
 }
 
-.menu_despegable_visible{
+.menu_despegable_visible {
     display: none;
 }
+
 @media screen and (max-width: 870px) {
-    .nav { margin: 0px 15px; }
+    .nav { margin: 0 15px; }
     .nav ul { display: none; }
     .menu_despegable { display: block; }
-    .megusta{
-        display: none;
-    }
+    .megusta { display: none; }
     
-    .menu_despegable_visible li{
-         padding: 30px;
+    .menu_despegable_visible {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 120px;
+        right: 20px;
+        background-color: tomato;
+        width: calc(100% - 40px);
+        gap: 0;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-
-    .menu_despegable:hover .menu_despegable_visible{
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          position: absolute;
-          transform: translate(-70%,0px);
-          background-color: tomato;
-          gap: 0px;
+    .menu_despegable:hover .menu_despegable_visible {
+        display: flex;
     }
 
-     
-    .menu_despegable_visible li:hover{
+    .menu_despegable_visible li {
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu_despegable_visible li:hover {
         background-color: turquoise;
         width: 100%;
- 
-  }
-
+    }
 }
 
 @media screen and (max-width: 750px) {
@@ -87,9 +115,7 @@
     .megusta { display: none; }
 }
 
-
-
-.panel{
+.panel {
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -99,35 +125,30 @@
     width: 100%;
     overflow-y: auto;
     background-color: var(--second-color);
-    transition: transform 0.3s ease  ,  opacity .3s ease;
-    transform: translate(0 ,-100%);
-
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translate(0, -100%);
 }
 
-.is-active{
-    transform: translate(0,0);
-    /* opacity: 1 ;  */
+.is-active {
+    transform: translate(0, 0);
 }
-
-
 
 #panel-btn {
-  z-index: 999;
-  position: fixed;
-  bottom: 1vh;
-  right: 1vw;
-  width: 4rem;
-  height: 4rem;
-  border-radius:50% ;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--main-color);
+    z-index: 999;
+    position: fixed;
+    bottom: 1vh;
+    right: 1vw;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
 }
 
-
-.corazones{
-    color: blue;
-    cursor: pointer; 
+.corazones {
+    color: red;
+    cursor: pointer;
 }

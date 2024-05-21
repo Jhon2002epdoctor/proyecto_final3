@@ -25,7 +25,7 @@
 <div class="contenedor">
       <div class="formulario">
             <form action="../Modelo/registroInsert" method="post">
-
+                <label for="" class="usuario"></label>
                 <label class="validarNombre" ></label>
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="Nombre" required>

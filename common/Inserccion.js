@@ -3,7 +3,7 @@ export function attachClickHandlers() {
     ojos.forEach((ojo) => {
       ojo.addEventListener("click", function () {
         const id = this.getAttribute("data-id");
-        window.location.href = `http://localhost/proyecto_final/Vista/MostrarCasa.php?id=${id}`;
+        window.location.href = `/proyecto_final/Vista/MostrarCasa.php?id=${id}`;
       });
     });
   }
@@ -19,7 +19,7 @@ export function Megusta() {
           id_usuario: id_usuario,
         };
   
-        fetch("http://localhost/proyecto_final/Modelo/Megusta.php", {
+        fetch("/proyecto_final/Modelo/Megusta.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
