@@ -15,15 +15,7 @@ if($id_usuario == 0){
 
 $query = "
 SELECT
-    casa.id_casa,
-    casa.descprcion,
-    casa.habitaciones,
-    casa.titulo,
-    casa.precio,
-    casa.comunidad_autonoma,
-    casa.ciudad,
-    casa.destacado,
-    casa.oculto,
+    casa.*,
     GROUP_CONCAT(CONCAT(imagenes.id_imagen, ':', imagenes.imagen, ':', imagenes.ocultoImagen) SEPARATOR ',') AS imagenes
 FROM
     casa
@@ -72,6 +64,8 @@ if ($stmt) {
                 'ciudad' => $row['ciudad'],
                 'destacado' => (int) $row['destacado'],
                 'oculto' => (int) $row['oculto'],
+                'banos' => $row['banos'],
+                'metros' => $row['metros'],
                 'imagenes' => $imagenes,
             ];
         }

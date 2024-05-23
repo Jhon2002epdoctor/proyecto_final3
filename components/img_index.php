@@ -7,12 +7,8 @@
             Remodeling
           </h1>
           <div class="texto-img">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo eaque
-            laudantium voluptas soluta adipisci hic natus? A animi impedit illo
-            eum temporibus provident obcaecati esse. Quisquam atque architecto
-            impedit odit.
+          En Vista Real Estate, nos dedicamos a ofrecer soluciones personalizadas en la compra, venta y alquiler de propiedades. Con un equipo de expertos comprometidos y una amplia cartera de inmuebles, garantizamos un servicio de calidad, adaptado a las necesidades y sueños de cada cliente.
           </div>
-          <button class="boton">Learn More</button>
         </div>
       </div>
 </div>

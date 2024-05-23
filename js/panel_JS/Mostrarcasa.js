@@ -12,7 +12,7 @@ async function MostrarCasa(id) {
   let carrusel = document.querySelector(".carrusel-container");
   const informacion = document.querySelector(".informacion");
   const icons_casa = document.querySelector(".icons-casa");
-
+  const descripcion = document.querySelector(".descripcion");
   await fetch(
     `/proyecto_final/Modelo/llamadas/MostrarCasa.php?id=${id}`
   )
@@ -22,8 +22,7 @@ async function MostrarCasa(id) {
 
       data.forEach((item) => {
         informacion.innerHTML = `
-             <h3>${validacionItem(item.titulo)}</h3>
-             <p>Piso en Venta en ${validacionItem(item.ciudad)}, ${validacionItem(item.comunidad_autonoma)}</p>
+             <p>${validacionItem(item.titulo)} en Venta en ${validacionItem(item.ciudad)}, ${validacionItem(item.comunidad_autonoma)}</p>
              <p>${ validacionItem(item.precio)}$</p>
         `;
       item.imagenes.forEach((img) => {

@@ -75,6 +75,11 @@ p{
     cursor: pointer; 
 }
 
+.pdf:hover {
+    color: red; 
+    cursor: pointer; 
+}
+
 .transparente{
     background-color: red !important;
     border-color: rgba(0, 0, 0, 0.1);

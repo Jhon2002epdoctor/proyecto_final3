@@ -38,6 +38,8 @@ if ($result->num_rows > 0) {
                 'ciudad' => $row['ciudad'],
                 'destacado' => $row['destacado'],
                 'oculto' => $row['oculto'],
+                'banos' => $row['banos'],
+                'metros' => $row['metros'],
                 'imagenes' => []
             ];
         }

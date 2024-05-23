@@ -30,6 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    const selectElement = document.getElementById('tipo');
+    valores["tipo"] = selectElement.value;
+
     if (validacion.estado && valores.imagenes && valores.imagenes.length > 0) {
       try {
         const imagePromises = Array.from(valores.imagenes).map((file) =>
@@ -38,12 +41,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const base64Images = await Promise.all(imagePromises);
         valores["imagenes"] = base64Images.map(image => image.split(",")[1]); 
 
+        console.log(valores);
         const response = await fetch("/proyecto_final/Modelo/panel_control/InsertarCasa.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(valores),
         });
         
+          
+
         if (response.success) {
           form.reset();  
         } else {

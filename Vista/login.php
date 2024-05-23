@@ -20,7 +20,8 @@
     <title>Document</title>
 </head>
 <body>
-  
+     
+
    <?php  include "../components/navbar.php"?>
 
 <div class="contenedor">
@@ -38,7 +39,7 @@
 
             <a href="registro.php">Crear una cuenta</a>
 
-            <button type="submit" class="login" id="submit">Iniciar</button>
+            <button type="submit"  class="login" id="submit">Iniciar</button>
         </form>
     </div>
   </div>  

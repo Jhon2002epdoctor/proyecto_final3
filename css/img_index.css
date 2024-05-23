@@ -26,13 +26,13 @@
     padding: 15px;
     background-color: rgba(15, 14, 14, 0.473);
     font-family: 'Open Sans', sans-serif;
-    font-size: clamp(8.5px, 1.5vw, 17px);  
+    font-size: clamp(13.5px, 1.5vw, 17px);  
 }
 
 .titulo-texto{
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: clamp(34.5px, 4vw, 64.5px);  
+    font-size: clamp(40.5px, 4vw, 55.5px);  
     color: #fff;
     margin: 0;
     padding: 0;

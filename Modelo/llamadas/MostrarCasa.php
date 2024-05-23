@@ -30,6 +30,8 @@ if ($idCasa > 0) {
                 'ciudad' => $row['ciudad'],
                 'comunidad_autonoma' => $row['comunidad_autonoma'],
                 'destacado' => $row['destacado'],
+                'banos' => $row['banos'],
+                'metros' => $row['metros'],
 
             ];
         }

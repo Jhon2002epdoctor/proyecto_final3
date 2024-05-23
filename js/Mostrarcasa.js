@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const urlObj = new URL(url);
   const params = new URLSearchParams(urlObj.search);
   const id = params.get("id");
-
   await MostrarCasa(id);
   carruselActivo();
 });
@@ -12,7 +11,7 @@ async function MostrarCasa(id) {
   let carrusel = document.querySelector(".carrusel-container");
   const informacion = document.querySelector(".informacion");
   const icons_casa = document.querySelector(".icons-casa");
-
+  const descripcion = document.querySelector(".descripcion");
   await fetch(
     `/proyecto_final/Modelo/llamadas/MostrarCasa.php?id=${id}`
   )
@@ -22,8 +21,7 @@ async function MostrarCasa(id) {
 
       data.forEach((item) => {
         informacion.innerHTML = `
-             <h3>${validacionItem(item.titulo)}</h3>
-             <p>Piso en Venta en ${validacionItem(item.ciudad)}, ${validacionItem(item.comunidad_autonoma)}</p>
+             <p>${validacionItem(item.titulo)} en Venta en ${validacionItem(item.ciudad)}, ${validacionItem(item.comunidad_autonoma)}</p>
              <p>${ validacionItem(item.precio)}$</p>
         `;
       item.imagenes.forEach((img) => {
@@ -44,18 +42,49 @@ async function MostrarCasa(id) {
           ${destacadoTexto}
           <div class="icon-casa">
               <p>Habitaciones</p>
-              <i style="font-size:24px" class="fa">&#xf236;</i>
+              <div>
+              <i style="font-size:24px" class="fa">&#xf236;</i> 
+              ${validacionItem(item.habitaciones)}
+              </div>
+     
           </div>
           <div class="icon-casa">
               <p>Baños</p>
+              <div>
               <i class="fa fa-bath" style="font-size:24px"></i>
+              ${validacionItem(item.banos)}
+              </div>
           </div>
           <div class="icon-casa">
               <p>m2</p>
+              <div>
               <i style='font-size:24px' class='far'>&#xf1ad;</i>
+              ${validacionItem(item.metros)}m2
+              </div>
           </div>
+               <div class="icon-casa">
+              <p>ciudad</p>
+              <div>
+              ${validacionItem(item.ciudad)}
+              </div>
+          </div>
+          </div>
+          <div class="icon-casa">
+              <p>Comunidad</p>
+              <div>
+              ${validacionItem(item.comunidad_autonoma)}
+              </div>
+          </div>
+        <div class="icon-casa">
+              <p>Tipo</p>
+              <div>
+              ${validacionItem(item.titulo)}
+              </div>
+          </div>
+          
         `
-      
+
+        descripcion.innerHTML = `${item.descprcion}`
       
       });
     })
