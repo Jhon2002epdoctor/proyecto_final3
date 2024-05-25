@@ -27,7 +27,7 @@ body {
 }
 
 .nav ul {
-    gap: 20px;
+    gap: 5px;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -72,7 +72,7 @@ body {
     display: none;
 }
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 950px) {
     .nav { margin: 0 15px; }
     .nav ul { display: none; }
     .menu_despegable { display: block; }
@@ -155,7 +155,7 @@ body {
     cursor: pointer;
 }
 
-/* Estilos para el menú desplegable del usuario */
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -172,7 +172,7 @@ body {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    left: -80px; /* Mover el menú 20px hacia la izquierda */
+    left: -80px; 
 }
 
 .dropdown-menu a {
@@ -186,7 +186,7 @@ body {
     background-color: #ddd;
 }
 
-/* Mostrar el menú desplegable al hacer hover */
+
 .dropdown:hover .dropdown-menu {
     display: block;
 }

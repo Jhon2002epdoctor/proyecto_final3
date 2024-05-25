@@ -3,7 +3,7 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    --color_card: #333; /* Definición de color para reutilización */
+    --color_card: #333; 
 }
 a{
     list-style: none;
@@ -11,7 +11,7 @@ a{
   color: white;
 
 }
-/* Sección Quién somos */
+
 .Quien-somos {
     display: flex;
     justify-content: center;
@@ -77,7 +77,7 @@ a{
     }
 }
 
-/* Estilos para la sección Destacados */
+
 .destacados {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -92,31 +92,31 @@ a{
     margin-bottom: 30px;
 }
 .card {
-    background-color: #333; /* Color uniforme para todas las tarjetas */
+    background-color: #333; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     max-width: 100%;
-    border-radius: 12px; /* Bordes redondeados */
+    border-radius: 12px; 
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .card:hover {
-    transform: translateY(-10px); /* Efecto de elevación al pasar el cursor */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más intensa al pasar el cursor */
+    transform: translateY(-10px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
 }
 
 .card-image-container {
     width: 100%;
-    height: 350px; /* Ajustar la altura fija del contenedor */
-    overflow: hidden; /* Ocultar cualquier parte de la imagen que se desborde */
+    height: 350px; 
+    overflow: hidden; 
 }
 
 .card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajustar la imagen dentro del contenedor */
+    object-fit: cover; 
 }
 
 .flex {
@@ -162,12 +162,12 @@ a{
     background-color: #007BFF;
     font-weight: 300;
     cursor: pointer;
-    border: none; /* Quitar el borde por defecto */
-    transition: background-color 0.3s ease, padding 0.3s ease; /* Transición suave */
+    border: none; 
+    transition: background-color 0.3s ease, padding 0.3s ease; 
 }
 
 .boton3:hover {
-    background-color: #0056b3; /* Color más oscuro al pasar el cursor */
+    background-color: #0056b3; 
 }
 
 @media screen and (max-width: 1457px) {

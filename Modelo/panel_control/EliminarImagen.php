@@ -5,7 +5,6 @@ include '../../conexion.php';
 $idImagen = isset($_GET['id_imagen']) ? intval($_GET['id_imagen']) : 0;
 
 if ($idImagen > 0) {
-    // Consulta para eliminar la imagen con el id específico
     $query = "DELETE FROM imagenes WHERE id_imagen = ?";
     
     $stmt = $conexion->prepare($query);

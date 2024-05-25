@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/Panelcss/panel.css">
-    <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="../../css/footer.css">
-    <link rel="stylesheet" href="../../estilo.css">
+    <link rel="stylesheet" href="/proyecto_final/css/Panelcss/panel.css">
+    <link rel="stylesheet" href="/proyecto_final/css/navbar.css">
+    <link rel="stylesheet" href="/proyecto_final/css/footer.css">
+    <link rel="stylesheet" href="/proyecto_final/estilo.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -22,35 +22,56 @@
 <body>
 
       
- <?php include "../../components/navbar.php" ?>
-         
- <?php 
+<?php 
 
-if(!isset($_SESSION['rol'])){
-      header('Location: ../../index2.php');
- }
-if(isset($_SESSION['rol'])){
-    if($_SESSION['rol'] != "admin"){
-      header('Location: ../../index2.php');
-    }
-}
+ob_start();
+
+include "../../components/navbar.php" 
+?>
+<?php 
+  if(!isset($_SESSION['rol'])){
+    header('Location: /proyecto_final/index2.php');
+    exit();
+  } else if($_SESSION['rol'] != "admin") {
+    header('Location: /proyecto_final/index2.php');
+    exit();
+  }
+  ob_end_flush();
 ?>
            
-           <div class="contenedor">
-        <button class="boton-insertar">Insertar Casa</button>
-        
-        <input type="tel" name="" class="buscador" id="buscador" placeholder="Buscador">
-        
-        <div class="flex-center">
-            <select id="filtro" class="filtro-select">
-                <option value="id_busqueda">ID</option>
-                <option value="precio">Precio</option>
-                <option value="titulo">Título</option>
-                <option value="comunidad">Comunidad</option>
-                <option value="imagenes">Imágenes</option>
+    <form id="filterForm">
+        <div class="filter-group">
+            <input type="checkbox" id="metrosCheckbox" name="metros">
+            <label for="metrosCheckbox">Filtrar por metros</label>
+            <input type="number" id="metros" name="metros" placeholder="Metros cuadrados" class="filter-input">
+        </div>
+        <div class="filter-group">
+            <input type="checkbox" id="priceCheckbox" name="price">
+            <label for="priceCheckbox">Filtrar por precio</label>
+            <input type="number" id="minPrice" name="minPrice" placeholder="Precio mínimo" class="filter-input">
+            <input type="number" id="maxPrice" name="maxPrice" placeholder="Precio máximo" class="filter-input">
+        </div>
+        <div class="filter-group">
+            <input type="checkbox" id="roomsCheckbox" name="rooms">
+            <label for="roomsCheckbox">Filtrar por habitaciones</label>
+            <input type="number" id="rooms" name="rooms" placeholder="Número de habitaciones" class="filter-input">
+        </div>
+        <div class="filter-group">
+            <input type="checkbox" id="typeCheckbox" name="type">
+            <label for="typeCheckbox">Tipo de casa</label>
+            <select name="houseType" id="houseType" class="filter-input">
+                <option value="mansion">Mansión</option>
+                <option value="chalet">Chalet</option>
+                <option value="atico">Ático</option>
             </select>
         </div>
+        <button type="button" id="buscar">Aplicar filtros</button>
+    </form>
+    <div class="no_encontrado">
         
+    </div>
+    <div class="contenedor">
+     <button class="boton-insertar">Insertar Casa</button>    
         <div id="contenedor-tarjetas" class="panel-contenedor">
             <div class="casa-panel">
                 <div class="id-panel">

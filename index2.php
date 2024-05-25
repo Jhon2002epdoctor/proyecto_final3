@@ -34,7 +34,7 @@
           presupuesto gratuito
         </p>
       </div>
-      <button class="boton2">Estimación gratuito</button>
+      <button class="boton3">Conctanos</button>
     </div>
 
   <?php include "components/main.php"?>

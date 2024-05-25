@@ -5,20 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("propertyForm");
   let validacion = { estado: true };
   let valores = {};
-  
+
   modificarBtn.addEventListener("click", async (event) => {
     event.preventDefault();
     const inputs = document.querySelectorAll("input");
     const texarea = document.getElementById("descripcion");
     let seccion = document.querySelector(".validarDescripcion");
-    seccion.innerHTML = "";  
+    seccion.innerHTML = "";
 
     if (texarea.value.trim() === "") {
       seccion.innerHTML = "Introduce una descripción";
       seccion.style.color = "red";
       validacion.estado = false;
     } else {
-      valores["descripcion"] = texarea.value.trim(); 
+      valores["descripcion"] = texarea.value.trim();
     }
 
     for (let input of inputs) {
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    const selectElement = document.getElementById('tipo');
+    const selectElement = document.getElementById("tipo");
     valores["tipo"] = selectElement.value;
 
     if (validacion.estado && valores.imagenes && valores.imagenes.length > 0) {
@@ -39,28 +39,26 @@ document.addEventListener("DOMContentLoaded", () => {
           convertFileToBase64(file)
         );
         const base64Images = await Promise.all(imagePromises);
-        valores["imagenes"] = base64Images.map(image => image.split(",")[1]); 
+        valores["imagenes"] = base64Images.map((image) => image.split(",")[1]);
 
         console.log(valores);
-        const response = await fetch("/proyecto_final/Modelo/panel_control/InsertarCasa.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(valores),
-        });
-        
-          
+        const response = await fetch(
+          "/proyecto_final/Modelo/panel_control/InsertarCasa.php",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(valores),
+          }
+        );
 
         if (response.success) {
-          form.reset();  
+          form.reset();
         } else {
-  
         }
       } catch (error) {
         console.error("Error:", error);
-     
       }
     } else {
- 
     }
   });
 
@@ -72,5 +70,4 @@ document.addEventListener("DOMContentLoaded", () => {
       reader.onerror = (error) => reject(error);
     });
   }
-  
 });

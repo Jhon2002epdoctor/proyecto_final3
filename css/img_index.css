@@ -40,11 +40,11 @@
 }
 
 .boton{
-    width: clamp(80px, 9vw, 150px);  /* Min: 80px, Ideal: 9% del viewport, Max: 150px */
-    height: clamp(26px, 3.5vw, 56px); /* Min: 45px, Ideal: 55px, Max: 65px */
+    width: clamp(80px, 9vw, 150px); 
+    height: clamp(26px, 3.5vw, 56px); 
     background-color: #e52f3c;
     border: 0;
     color: #fff;
-    font-size: clamp(12px, 1.5vw, 17px);  /* Corregido para mantener el efecto responsive */
+    font-size: clamp(12px, 1.5vw, 17px);  
     font-weight: 600;
 }

@@ -43,24 +43,54 @@ async function MostrarCasa(id) {
           ${destacadoTexto}
           <div class="icon-casa">
               <p>Habitaciones</p>
-              <i style="font-size:24px" class="fa">&#xf236;</i>
+              <div>
+              <i style="font-size:24px" class="fa">&#xf236;</i> 
+              ${validacionItem(item.habitaciones)}
+              </div>
+     
           </div>
           <div class="icon-casa">
               <p>Baños</p>
+              <div>
               <i class="fa fa-bath" style="font-size:24px"></i>
+              ${validacionItem(item.banos)}
+              </div>
           </div>
           <div class="icon-casa">
               <p>m2</p>
+              <div>
               <i style='font-size:24px' class='far'>&#xf1ad;</i>
+              ${validacionItem(item.metros)}m2
+              </div>
           </div>
+               <div class="icon-casa">
+              <p>ciudad</p>
+              <div>
+              ${validacionItem(item.ciudad)}
+              </div>
+          </div>
+          </div>
+          <div class="icon-casa">
+              <p>Comunidad</p>
+              <div>
+              ${validacionItem(item.comunidad_autonoma)}
+              </div>
+          </div>
+        <div class="icon-casa">
+              <p>Tipo</p>
+              <div>
+              ${validacionItem(item.titulo)}
+              </div>
+          </div>
+          
         `
-      
+
+        descripcion.innerHTML = `${item.descprcion}`
       
       });
     })
     .catch((error) => console.error("Error:", error));
 }
-
 const carruselActivo = () => {
   const carrusel = document.querySelector(".carrusel-container");
   const btnback = document.querySelector("#btnback");
@@ -83,7 +113,7 @@ const carruselActivo = () => {
 
   
     if (screenWidth > 700) {
-      scrollAmount = 600; 
+      scrollAmount = 900; 
     } else {
       scrollAmount = 300;
     }

@@ -1,103 +1,89 @@
 <?php
 include '../conexion.php';
 
-$data = json_decode(file_get_contents("php://input"));
+$data = json_decode(file_get_contents('php://input'), true);
 
-$metodoBusqueda = $data->metodoBusqueda ?? '';
-$valorBuscador = $data->valorBuscador ?? '';
+$query = "
+    SELECT
+        casa.*,
+        imagenes.id_imagen,
+        imagenes.imagen,
+        imagenes.ocultoImagen
+    FROM
+        casa
+    LEFT JOIN
+        imagenes ON casa.id_casa = imagenes.id_casa
+    WHERE
+        casa.oculto = 0
+";
 
-$query = '';
-$params = [];
+// Aplicar los filtros si están presentes
+$conditions = [];
 
-switch ($metodoBusqueda) {
-    case 'precio':
-        $query = "
-            SELECT
-                casa.*,
-                GROUP_CONCAT(CONCAT(imagenes.id_imagen, ':', imagenes.imagen, ':', imagenes.ocultoImagen) SEPARATOR ',') AS imagenes
-            FROM
-                casa
-            JOIN
-                imagenes ON casa.id_casa = imagenes.id_casa
-            WHERE
-                casa.oculto = 0 AND casa.precio = ?
-            GROUP BY
-                casa.id_casa
-        ";
-        $params = ["d", $valorBuscador];
-        break;
-    
-    case 'titulo':
-        $query = "
-            SELECT
-                casa.*,
-                GROUP_CONCAT(CONCAT(imagenes.id_imagen, ':', imagenes.imagen, ':', imagenes.ocultoImagen) SEPARATOR ',') AS imagenes
-            FROM
-                casa
-            JOIN
-                imagenes ON casa.id_casa = imagenes.id_casa
-            WHERE
-                casa.oculto = 0 AND casa.titulo LIKE ?
-            GROUP BY
-                casa.id_casa
-        ";
-        $params = ["s", "%{$valorBuscador}%"];
-        break;
-    
-    case 'todos':
-        $query = "
-            SELECT
-                casa.*,
-                GROUP_CONCAT(CONCAT(imagenes.id_imagen, ':', imagenes.imagen, ':', imagenes.ocultoImagen) SEPARATOR ',') AS imagenes
-            FROM
-                casa
-            JOIN
-                imagenes ON casa.id_casa = imagenes.id_casa
-            WHERE
-                casa.oculto = 0
-            GROUP BY
-                casa.id_casa
-        ";
-        break;
-    
-    default:
-        echo json_encode(['message' => 'No se encontraron casas.']);
-        exit;
+if (isset($data['metros']) && !empty($data['metros'])) {
+    $metros = intval($data['metros']);
+    $conditions[] = "casa.metros = $metros";
 }
 
-$stmt = $conexion->prepare($query);
-if (!$stmt) {
-    echo json_encode(['message' => 'No se encontraron casas.']);
-    exit;
+if (isset($data['price']) && !empty($data['price'])) {
+    $minPrice = intval($data['price']['min']);
+    $maxPrice = intval($data['price']['max']);
+    $conditions[] = "casa.precio BETWEEN $minPrice AND $maxPrice";
 }
 
-if (!empty($params)) {
-    $stmt->bind_param($params[0], $params[1]);
+if (isset($data['rooms']) && !empty($data['rooms'])) {
+    $rooms = intval($data['rooms']);
+    $conditions[] = "casa.habitaciones = $rooms";
 }
-$stmt->execute();
-$result = $stmt->get_result();
+
+if (isset($data['houseType']) && !empty($data['houseType'])) {
+    $houseType = $conexion->real_escape_string($data['houseType']);
+    $conditions[] = "casa.titulo = '$houseType'";
+}
+
+if (!empty($conditions)) {
+    $query .= ' AND ' . implode(' AND ', $conditions);
+}
+
+// Ejecutar la consulta
+$result = $conexion->query($query);
 
 $casas = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $imagenes = array_map(function ($imagen_str) {
-            list($id_imagen, $imagen_base64, $oculto) = explode(':', $imagen_str);
-            return [
-                'id_imagen' => (int) $id_imagen,
-                'imagen' => $imagen_base64,
-                'ocultoImagen' => (int) $oculto,
+        $id_casa = $row['id_casa'];
+
+        if (!isset($casas[$id_casa])) {
+            $casas[$id_casa] = [
+                'id' => $id_casa,
+                'descprcion' => $row['descprcion'],
+                'titulo' => $row['titulo'],
+                'habitaciones' => $row['habitaciones'],
+                'precio' => $row['precio'],
+                'comunidad_autonoma' => $row['comunidad_autonoma'],
+                'ciudad' => $row['ciudad'],
+                'destacado' => $row['destacado'],
+                'oculto' => $row['oculto'],
+                'banos' => $row['banos'],
+                'metros' => $row['metros'],
+                'imagenes' => []
             ];
-        }, explode(',', $row['imagenes']));
-        $casas[] = array_merge($row, ['imagenes' => $imagenes]);
+        }
+
+        if ($row['id_imagen'] !== null) {
+            $casas[$id_casa]['imagenes'][] = [
+                'id_imagen' => $row['id_imagen'],
+                'imagen' => $row['imagen'],
+                'ocultoImagen' => $row['ocultoImagen']
+            ];
+        }
     }
-} else {
-    $casas = ['message' => 'No se encontraron casas.'];
 }
 
-$stmt->close();
-$conexion->close();
+$casas = array_values($casas);
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
+
 echo json_encode($casas);
 ?>

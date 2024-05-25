@@ -14,10 +14,10 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/img_index.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../estilo.css">
+    <link rel="stylesheet" href="/proyecto_final/css/navbar.css">
+    <link rel="stylesheet" href="/proyecto_final/css/img_index.css">
+    <link rel="stylesheet" href="/proyecto_final/css/footer.css">
+    <link rel="stylesheet" href="/proyecto_final/estilo.css">
     <style>
 body {
     font-family: Arial, sans-serif;

@@ -4,7 +4,7 @@ include '../../conexion.php';
 $idCasa = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($idCasa > 0) {
-    // Obtener el valor actual de `oculto` y cambiarlo al valor opuesto
+
     $query = "SELECT oculto FROM casa WHERE id_casa = ?";
     if ($stmt = $conexion->prepare($query)) {
         $stmt->bind_param("i", $idCasa);
@@ -15,7 +15,6 @@ if ($idCasa > 0) {
 
         $nuevoValorOculto = $oculto ? 0 : 1;
 
-        // Actualizar el valor de `oculto`
         $updateQuery = "UPDATE casa SET oculto = ? WHERE id_casa = ?";
         if ($updateStmt = $conexion->prepare($updateQuery)) {
             $updateStmt->bind_param("ii", $nuevoValorOculto, $idCasa);

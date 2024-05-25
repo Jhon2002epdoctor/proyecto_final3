@@ -5,107 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Propiedad</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../estilo.css">
-    <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="../../css/footer.css">
-    <link rel="stylesheet" href="../../css/Mostrarcasa.css">
+    <link rel="stylesheet" href="/proyecto_final/estilo.css">
+    <link rel="stylesheet" href="/proyecto_final/css/navbar.css">
+    <link rel="stylesheet" href="/proyecto_final/css/footer.css">
+    <link rel="stylesheet" href="/proyecto_final/css/Mostrarcasa.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        .contenedor {
-            margin: 40px auto;
-            max-width: 800px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-        .contenedor h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"], input[type="number"], textarea, select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
-            border-color: #007BFF;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.1);
-        }
-        .boton3 {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            align-self: center;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-        .boton3:hover {
-            background-color: #0056b3;
-        }
-        .imagenes-modificar, .imagen-modificar {
-            margin-bottom: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-        }
-        .imagen-modificar img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-        @media (max-width: 768px) {
-            .contenedor {
-                margin: 20px;
-                padding: 15px;
-            }
-            input[type="text"], input[type="number"], textarea, select {
-                padding: 10px;
-                font-size: 14px;
-            }
-            .boton3 {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/proyecto_final/css/Panelcss/InsertarCasa.css">
 </head>
 <body>
-<?php include "../../components/navbar.php" ?>
+   
+
+<?php 
+
+ob_start();
+
+include "../../components/navbar.php" 
+?>
 <?php 
   if(!isset($_SESSION['rol'])){
-    header('Location: ../../index2.php');
-  } elseif($_SESSION['rol'] != "admin") {
-    header('Location: ../../index2.php');
+    header('Location: /proyecto_final/index2.php');
+
+    exit();
+  } else if($_SESSION['rol'] != "admin") {
+    header('Location: /proyecto_final/index2.php');
+
+    exit();
   }
+  ob_end_flush();
 ?>
 <div class="contenedor">
-    <h2>Modificar Propiedad</h2>
+    <h2>InsertarCasa</h2>
     <form id="propertyForm">
 
         <label class="validarDescripcion"></label>
@@ -115,10 +44,6 @@
         <label class="validarHabitaciones"></label>
         <label for="habitaciones">Habitaciones:</label>
         <input type="number" id="habitaciones" name="Habitaciones" placeholder="Cantidad de habitaciones">
-
-        <label class="validarTitulo"></label>
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="Titulo" placeholder="Titulo">
 
         <label class="validarPrecio"></label>
         <label for="precio">Precio:</label>
@@ -143,12 +68,12 @@
 
         <label for="tipo">Tipo de Propiedad:</label>
         <select id="tipo" name="Tipo">
-            <option value="piso">Piso</option>
-            <option value="chalet">Chalet</option>
-            <option value="mansion">Mansión</option>
-            <option value="apartamento">Apartamento</option>
-            <option value="duplex">Dúplex</option>
-            <option value="estudio">Estudio</option>
+            <option value="Piso">Piso</option>
+            <option value="Chalet">Chalet</option>
+            <option value="Mansion">Mansión</option>
+            <option value="Apartamento">Apartamento</option>
+            <option value="Duplex">Dúplex</option>
+            <option value="Estudio">Estudio</option>
         </select>
 
 

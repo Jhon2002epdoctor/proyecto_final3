@@ -6,28 +6,34 @@
     
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Document</title>
-    <link rel="stylesheet" href="../../estilo.css">
-    <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="../../css/footer.css">
-    <link rel="stylesheet" href="../../css/Mostrarcasa.css">
+    <link rel="stylesheet" href="/proyecto_final/estilo.css">
+    <link rel="stylesheet" href="/proyecto_final/css/navbar.css">
+    <link rel="stylesheet" href="/proyecto_final/css/footer.css">
+    <link rel="stylesheet" href="/proyecto_final/css/Mostrarcasa.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 </head>
 <body>
- <?php include "../../components/navbar.php" ?>
-  <?php 
-    if(!isset($_SESSION['rol'])){
-        header('Location: ../../index2.php');
-   }
-  if(isset($_SESSION['rol'])){
-      if($_SESSION['rol'] != "admin"){
-        header('Location: ../../index2.php');
-      }
+<?php 
+
+ob_start();
+
+include "../../components/navbar.php" 
+?>
+<?php 
+  if(!isset($_SESSION['rol'])){
+    header('Location: /proyecto_final/index2.php');
+
+    exit();
+  } else if($_SESSION['rol'] != "admin") {
+    header('Location: /proyecto_final/index2.php');
+
+    exit();
   }
-    
-  ?>
+  ob_end_flush();
+?>
     <div class="container">
        <div class="informacion">
        </div>

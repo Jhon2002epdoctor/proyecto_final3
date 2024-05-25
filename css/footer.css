@@ -1,8 +1,8 @@
 :root {
-    --footer-background-color: #1452eeeb;  /* Color de fondo del footer */
-    --footer-title-color: #fff;            /* Color de los títulos en el footer */
-    --footer-text-color: #fff;             /* Color del texto en el footer */
-    --footer-icon-size: 45px;              /* Tamaño de los íconos en el footer */
+    --footer-background-color: #1452eeeb;  
+    --footer-title-color: #fff;           
+    --footer-text-color: #fff;          
+    --footer-icon-size: 45px;  
 }
 
 .footer{
@@ -11,9 +11,9 @@
     color: var(--footer-text-color);
     background-color: var(--footer-background-color);
     display: grid;
-    grid-template-rows: auto 1fr auto;  /* Ajuste para que sea más adaptable */
+    grid-template-rows: auto 1fr auto;  
     width: 100%;
-    padding: 30px 20px;  /* Añadir padding para un espaciado interno */
+    padding: 30px 20px;  
 }
 
 .footer-redes, .footer-texto {
@@ -34,35 +34,34 @@
 
 .footer-iconos i {
     font-size: var(--footer-icon-size);
-    color: var(--footer-title-color);  /* Consistencia en el color de los íconos */
+    color: var(--footer-title-color); 
 }
 
 .footer-texto {
     flex-direction: row;
-    gap: 20px;  /* Ajustar el espaciado entre listas */
+    gap: 20px;  
 }
 
 .footer-texto ul {
-    list-style-type: none;  /* Remover los estilos de lista por defecto */
+    list-style-type: none; 
     padding: 0;
 }
 
 .footer-texto li {
     font-weight: 200;
-    margin-top: 10px;  /* Espaciado entre elementos de la lista */
+    margin-top: 10px; 
 }
 
 .titulo-footer {
     font-size: 20px;
     font-weight: bold;
     color: var(--footer-title-color);
-    margin-bottom: 10px;  /* Espaciado debajo del título */
+    margin-bottom: 10px; 
 }
 
-/* Media Queries para Responsividad */
 @media (max-width: 768px) {
     .footer {
-        grid-template-rows: auto;  /* Simplificar el layout en dispositivos móviles */
+        grid-template-rows: auto; 
     }
 
     .footer-redes, .footer-texto {

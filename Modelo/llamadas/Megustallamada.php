@@ -1,8 +1,6 @@
 <?php
 
 include '../../conexion.php';
-
-// Recibe el id_usuario desde una solicitud. Supongamos que se obtiene mediante POST.
   
 $data = json_decode(file_get_contents("php://input"));
 
@@ -29,7 +27,6 @@ GROUP BY
     casa.id_casa;
 ";
 
-// Prepara la sentencia.
 $stmt = $conexion->prepare($query);
 
 if ($stmt) {
@@ -44,16 +41,22 @@ if ($stmt) {
         while ($row = $result->fetch_assoc()) {
       
             $imagenes = array_map(function ($imagen_str) {
+                $parts = explode(':', $imagen_str);
                 
-                list($id_imagen, $imagen_base64, $oculto) = explode(':', $imagen_str);
-                return [
-                    'id_imagen' => (int) $id_imagen,
-                    'imagen' => $imagen_base64,
-                    'ocultoImagen' => (int) $oculto,
-                ];
+                if (count($parts) === 3) {
+                    list($id_imagen, $imagen_base64, $oculto) = $parts;
+                    return [
+                        'id_imagen' => (int) $id_imagen,
+                        'imagen' => $imagen_base64,
+                        'ocultoImagen' => (int) $oculto,
+                    ];
+                } else {
+                    return null; 
+                }
             }, explode(',', $row['imagenes']));
 
-          
+            $imagenes = array_filter($imagenes);
+
             $casas[] = [
                 'id_casa' => $row['id_casa'],
                 'descprcion' => $row['descprcion'],
@@ -69,13 +72,11 @@ if ($stmt) {
                 'imagenes' => $imagenes,
             ];
         }
-    }
-    else{
+    } else {
         $casas = [
             'message' => 'No se encontraron casas.',
         ];
     }
-
 
     $stmt->close();
 } else {
@@ -85,10 +86,8 @@ if ($stmt) {
     ];
 }
 
-
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
-
 
 echo json_encode($casas);
 

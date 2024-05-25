@@ -114,3 +114,15 @@ p{
     color: white;
     border: 1px solid #007bff;
   }
+
+.encontrado{
+    text-align: center;
+}
+
+
+a{
+    list-style: none;
+    text-decoration: none;
+  color: white;
+
+}

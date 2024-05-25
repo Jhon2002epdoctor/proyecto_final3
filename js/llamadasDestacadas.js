@@ -3,7 +3,7 @@ import { DescargarPDF } from "../common/pdf.js";
 
 export async function LlamadasDestacadas() {
   const response = await fetch(
-    "http://localhost/proyecto_final/Modelo/llamadas/destacados.php"
+    "/proyecto_final/Modelo/llamadas/destacados.php"
   );
   const data = await response.json();
 

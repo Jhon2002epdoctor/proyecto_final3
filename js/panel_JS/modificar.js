@@ -27,13 +27,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function MostrarCasa(id) {
   const descripcion = document.querySelector("textarea");
   const habitaciones = document.querySelector("#habitaciones");
-  const titulo = document.querySelector("#titulo");
   const precio = document.querySelector("#precio");
   const comunidad = document.querySelector("#comunidad");
   const ciudad = document.querySelector("#ciudad");
   const destacado = document.querySelector("#destacado");
   const imagenes = document.querySelector(".imagenes-modificar");
   const oculto = document.querySelector("#oculto");
+  const tipo = document.querySelector("#tipo");
   let ckecked = ``; 
 
   await fetch(
@@ -46,12 +46,11 @@ async function MostrarCasa(id) {
         habitaciones.value = data[0].habitaciones;
         comunidad.value = data[0].comunidad_autonoma;
         ciudad.value = data[0].ciudad;
-        titulo.value = data[0].titulo;
         precio.value = data[0].precio;
         descripcion.value = data[0].descripcion;
         destacado.checked = data[0].destacado === 1 ? true : false;
         oculto.checked = data[0].oculto === 1 ? true : false;
-        
+        tipo.value = data[0].titulo;
       
         data[0].imagenes.forEach((img) => {
           ckecked = img.oculto == 0 ? "" : "checked"
@@ -74,12 +73,12 @@ async function ModificarCasa(imagenesArray , id) {
   );  
   const descripcion = document.querySelector("textarea").value;
   const habitaciones = document.querySelector("#habitaciones").value;
-  const titulo = document.querySelector("#titulo").value;
   const precio = document.querySelector("#precio").value;
   const comunidad = document.querySelector("#comunidad").value;
   const ciudad = document.querySelector("#ciudad").value;
   const destacado = document.querySelector("#destacado").checked;
   const oculto = document.querySelector("#oculto").checked;
+  const tipo = document.querySelector("#tipo").value;
   let valorCkeck = []
   let valor = {}
 
@@ -92,7 +91,7 @@ async function ModificarCasa(imagenesArray , id) {
     id: id,
     descripcion: descripcion,
     habitaciones: habitaciones,
-    titulo: titulo,
+    titulo: tipo,
     precio: precio,
     comunidad: comunidad,
     ciudad: ciudad,

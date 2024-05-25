@@ -113,7 +113,7 @@ const carruselActivo = () => {
 
   
     if (screenWidth > 700) {
-      scrollAmount = 600; 
+      scrollAmount = 900; 
     } else {
       scrollAmount = 300;
     }

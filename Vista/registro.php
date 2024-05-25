@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/registro.css">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css//footer.css">
-    <link rel="stylesheet" href="../estilo.css">
+    <link rel="stylesheet" href="/proyecto_final/css/registro.css">
+    <link rel="stylesheet" href="/proyecto_final/css/navbar.css">
+    <link rel="stylesheet" href="/proyecto_final/css/footer.css">
+    <link rel="stylesheet" href="/proyecto_final/estilo.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"

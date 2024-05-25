@@ -1,9 +1,11 @@
 body, html {
     margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
-    --color_card: #333; /* Definición de color para reutilización */
+    --color_card: #333; 
+    font-family: Arial, sans-serif;
+
+    background-color: #f4f4f9;
 }
 
 .contenedor {
@@ -50,7 +52,7 @@ label {
 
 .panel-contenedor {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Default layout for large screens */
+    grid-template-columns: repeat(4, 1fr); 
     gap: 20px;
     padding: 20px;
     background-color: #fafafa;
@@ -59,31 +61,31 @@ label {
 }
 
 .card {
-    background-color: #333; /* Color uniforme para todas las tarjetas */
+    background-color: #333; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     max-width: 100%;
-    border-radius: 12px; /* Bordes redondeados */
+    border-radius: 12px; 
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .card:hover {
-    transform: translateY(-10px); /* Efecto de elevación al pasar el cursor */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más intensa al pasar el cursor */
+    transform: translateY(-10px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
 }
 
 .card-image-container {
     width: 100%;
-    height: 350px; /* Ajustar la altura fija del contenedor */
-    overflow: hidden; /* Ocultar cualquier parte de la imagen que se desborde */
+    height: 350px; 
+    overflow: hidden; 
 }
 
 .card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajustar la imagen dentro del contenedor */
+    object-fit: cover; 
 }
 
 .flex {
@@ -129,40 +131,110 @@ label {
     background-color: #007BFF;
     font-weight: 300;
     cursor: pointer;
-    border: none; /* Quitar el borde por defecto */
-    transition: background-color 0.3s ease, padding 0.3s ease; /* Transición suave */
+    border: none;
+    transition: background-color 0.3s ease, padding 0.3s ease; 
 }
 
 .boton3:hover {
-    background-color: #0056b3; /* Color más oscuro al pasar el cursor */
+    background-color: #0056b3; 
 }
 
 @media screen and (max-width: 1200px) {
     .panel-contenedor {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
 @media screen and (max-width: 899px) {
     .panel-contenedor {
-        grid-template-columns: repeat(1, 1fr); /* 1 column for small screens */
+        grid-template-columns: repeat(1, 1fr); 
     }
     .boton3 {
-        padding: 0.75em 2em; /* Reducir el padding para pantallas más pequeñas */
+        padding: 0.75em 2em; 
     }
 }
 
 @media screen and (max-width: 673px) {
     .panel-contenedor {
-        grid-template-columns: 1fr; /* 1 column for small screens */
+        grid-template-columns: 1fr; 
     }
     .boton3 {
-        padding: 0.5em 1.5em; /* Reducir aún más el padding para pantallas pequeñas */
+        padding: 0.5em 1.5em; 
     }
 }
 
-/* Responsive padding adjustments */
+
 .padding-top-5 { padding-top: 5px; }  
 .padding-bottom-5 { padding-bottom: 5px; }
 .padding-top-10 { padding-top: 10px; }
 .padding-bottom-10 { padding-bottom: 10px; }
+
+form {
+    margin: 40px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+form div {
+    margin-bottom: 15px;
+    flex: 1;
+    min-width: 150px;
+}
+
+label {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+input[type="number"], select {
+    margin-top: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.casa {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+    form {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+
+a{
+    list-style: none;
+    text-decoration: none;
+  color: white;
+
+}
+

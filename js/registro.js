@@ -1,36 +1,3 @@
-// import { validarInput } from "../common/validaciones.js";
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     document.querySelector(".enviar").addEventListener("click", (e) => {
-//         e.preventDefault();
-//         let validacion = {estado:true}
-//         const inputs = document.querySelectorAll("input");
-//         let  valores = {}
-//        for (let input of inputs) {
-//             validarInput(input , validacion);
-//             valores = {...valores, [input.id]: input.value};
-//         }
-
-//     fetch('http://localhost/proyecto_final/Modelo/Megusta.php' , 
-//     {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(valores)
-//     }
-//     )
-        
-        
-    
-    
-//         if(validacion.estado){
-//             console.log(valores);   
-//         }
-//     );
-    
-// })
-
 import { validarInput } from "../common/validaciones.js";
 
 document.addEventListener("DOMContentLoaded", () => {
