@@ -1,5 +1,6 @@
 
 import { PaginacionBuscador } from "../../class/PaginacionClassBuscador.js";
+import { BASE_URL } from "../config.js";
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -40,7 +41,7 @@ function InsertarCasas(datos) {
               </div>
               <div class="precio-panel">
                   <p>Precio</p>
-                  <p>${dato.precio}$</p>
+                  <p>${dato.precio}€</p>
               </div>
               <div class="titulo-panel">
                   <p>Tipo</p>
@@ -72,7 +73,7 @@ function VerCasa() {
   botonesVer.forEach((boton) => {
       boton.addEventListener("click", function () {
           const id = this.getAttribute("data-id");
-          window.location.href = `/proyecto_final/Vista/panel_control/MostrasCasa.php?id=${id}`;
+          window.location.href = `${BASE_URL}/Vista/panel_control/MostrasCasa.php?id=${id}`;
       });
   });
 }
@@ -86,7 +87,7 @@ async function OcultarCasa() {
             boton.addEventListener("click", async function (event) {
                 event.stopPropagation(); // Detiene la propagación del evento
                 const id = this.getAttribute("data-id");
-                await fetch(`/proyecto_final/Modelo/panel_control/EliminarCasa.php?id=${id}`)
+                await fetch(`${BASE_URL}/Modelo/panel_control/EliminarCasa.php?id=${id}`)
                     .then(response => response.json())
                     .then(data => {
                         const casaPanel = boton.closest('.casa-panel');
@@ -106,7 +107,7 @@ function ModificarCasa() {
   botonesModificar.forEach((boton) => {
       boton.addEventListener("click", function () {
           const id = this.getAttribute("data-id");
-          window.location.href = `/proyecto_final/Vista/panel_control/ModificarCasa.php?id=${id}`;
+          window.location.href = `${BASE_URL}/Vista/panel_control/ModificarCasa.php?id=${id}`;
       });
   });
 }
@@ -140,7 +141,7 @@ async function applyFilters() {
       InsertarCasas
     );
   
-    await paginacion.IniciarEjecuccion("/proyecto_final/Modelo/panel_control/Buscador.php", {
+    await paginacion.IniciarEjecuccion(`${BASE_URL}/Modelo/panel_control/Buscador.php`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -153,7 +154,7 @@ async function applyFilters() {
 function BotonInsertarCasa(){
     const boton = document.querySelector(".boton-insertar");
     boton.addEventListener("click", function () {
-        window.location.href = `/proyecto_final/Vista/panel_control/InsertarCasa.php`;
+        window.location.href = `${BASE_URL}/Vista/panel_control/InsertarCasa.php`;
     });
 }
 

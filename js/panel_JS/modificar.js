@@ -1,4 +1,5 @@
 import { convertFileToBase64 } from "../../common/ConVertirEnBase64.js";
+import { BASE_URL } from "../config.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const url = window.location.href;
@@ -38,7 +39,7 @@ async function MostrarCasa(id) {
   let ckecked = ``; 
 
   await fetch(
-    `/proyecto_final/Modelo/panel_control/MostraCasaModificada.php?id=${id}`
+    `${BASE_URL}/Modelo/panel_control/MostraCasaModificada.php?id=${id}`
   )
     .then((response) => response.json())
     .then(async (data) => {
@@ -105,7 +106,7 @@ async function ModificarCasa(imagenesArray , id) {
   };
   console.log(datosEnviar);
   await fetch(
-    `/proyecto_final/Modelo/panel_control/Modificar.php?`,
+    `${BASE_URL}/Modelo/panel_control/Modificar.php?`,
     {
       method: "POST",
       headers: {
@@ -117,6 +118,6 @@ async function ModificarCasa(imagenesArray , id) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      window.location.href = "/proyecto_final/Vista/Panel_control/panel.php";
+      window.location.href = `${BASE_URL}/Vista/Panel_control/panel.php`;
     });
 }

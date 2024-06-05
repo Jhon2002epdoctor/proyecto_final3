@@ -1,13 +1,14 @@
 import { Paginacion } from "../class/PaginacionClass.js";
 import { Megusta, attachClickHandlers } from "../common/Inserccion.js";
 import { DescargarPDF } from "../common/pdf.js";
+import { BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded" ,  async () => {
    let id = localStorage .getItem("id");
 
   let paginacion = new Paginacion(".panel-contenedor", "#paginacion", 3, InsertarCasas);
 
-  paginacion.IniciarEjecuccion("/proyecto_final/Modelo/llamadas/Megustallamada.php",   {
+  paginacion.IniciarEjecuccion(`${BASE_URL}/Modelo/llamadas/Megustallamada.php`,   {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -63,7 +64,7 @@ async function InsertarCasas(datos) {
               </div>
               <div class="icons-3 flex padding-bottom-10 padding-top-10">
                 <i style="font-size: 18px" class="fa">&#xf095;</i>
-                <button class="boton3"><a href="/proyecto_final/Vista/Conctato.php">Contactar</a></button>
+                <button class="boton3"><a href="${BASE_URL}/Vista/Conctato.php">Contactar</a></button>
               </div>
             </div>`;
 

@@ -1,9 +1,11 @@
+import { BASE_URL } from "../js/config.js";
+
 export function attachClickHandlers() {
   const ojos = document.querySelectorAll(".ojo");
   ojos.forEach((ojo) => {
     ojo.addEventListener("click", function () {
       const id = this.getAttribute("data-id");
-      window.location.href = `/proyecto_final/Vista/MostrarCasa.php?id=${id}`;
+      window.location.href = `${BASE_URL}/Vista/MostrarCasa.php?id=${id}`;
     });
   });
 }
@@ -19,7 +21,7 @@ export function Megusta() {
         id_usuario: id_usuario,
       };
 
-      fetch("/proyecto_final/Modelo/Megusta.php", {
+      fetch(`${BASE_URL}/Modelo/Megusta.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

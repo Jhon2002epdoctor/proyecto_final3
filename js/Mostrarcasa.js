@@ -1,3 +1,6 @@
+import { BASE_URL } from "./config.js";
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   const url = window.location.href;
   const urlObj = new URL(url);
@@ -13,7 +16,7 @@ async function MostrarCasa(id) {
   const icons_casa = document.querySelector(".icons-casa");
   const descripcion = document.querySelector(".descripcion");
   await fetch(
-    `/proyecto_final/Modelo/llamadas/MostrarCasa.php?id=${id}`
+    `${BASE_URL}/Modelo/llamadas/MostrarCasa.php?id=${id}`
   )
     .then((response) => response.json())
     .then(async (data) => {

@@ -1,4 +1,5 @@
 import { validarInput } from "../common/validaciones.js";
+import { BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".enviar").addEventListener("click", (e) => {
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (validacion.estado) {
-            fetch('/proyecto_final/Modelo/registroInsertar.php', {
+            fetch(`${BASE_URL}/Modelo/registroInsertar.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
                      usuario.innerHTML = "Usuario ya registrado";
                   }
                   else{
-                        window.location.href = "/proyecto_final/Vista/login.php";
+                        window.location.href = `${BASE_URL}/Vista/login.php`;
                   }
 
             })

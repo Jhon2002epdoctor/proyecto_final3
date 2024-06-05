@@ -1,10 +1,17 @@
+
 <?php
-$salir =  isset($_GET["salir"]) ? $_GET["salir"] : false; 
 
+require_once dirname(__DIR__) . '../../config.php'; 
 
-if($salir){
-    session_start();
+session_start();
+
+$salir = isset($_GET["salir"]) ? $_GET["salir"] : false;
+
+if ($salir) {
+    // Destruir la sesión
     session_destroy();
-    header("Location: /proyecto_final/Vista/login.php");
+        header("Location: ". BASE_URL ."/Vista/login.php");
+
+    exit();
 }
 ?>

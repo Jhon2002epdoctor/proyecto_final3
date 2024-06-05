@@ -1,7 +1,8 @@
 <footer>
       <div class="footer">
          <div class="footer-redes">
-                 <img src="/proyecto_final/img/logoSL.webp" alt="">
+                 <img src="<?php echo BASE_URL?>/img/logoSL.webp" alt="">
+
             <div class="footer-iconos">
                       <a href="https://www.facebook.com" target="_blank">
                           <i class="fa fa-facebook-square" style="font-size:45px"></i>

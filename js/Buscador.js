@@ -2,6 +2,7 @@ import { Paginacion } from "../class/PaginacionClass.js";
 import { PaginacionBuscador } from "../class/PaginacionClassBuscador.js";
 import { Megusta, attachClickHandlers } from "../common/Inserccion.js";
 import { DescargarPDF } from "../common/pdf.js";
+import { BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
  
@@ -47,7 +48,7 @@ async function applyFilters() {
     InsertarCasas
   );
 
-  await paginacion.IniciarEjecuccion("/proyecto_final/Modelo/Buscador2.php", {
+  await paginacion.IniciarEjecuccion(`${BASE_URL}/Modelo/Buscador2.php`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -104,7 +105,7 @@ function InsertarCasas(datos) {
               </div>
               <div class="icons-3 flex padding-bottom-10 padding-top-10">
                 <i style="font-size: 18px" class="fa">&#xf095;</i>
-                <button class="boton3"><a href="/proyecto_final/Vista/Conctato.php">Contactar</a></button>
+                <button class="boton3"><a href="${BASE_URL}/Vista/Conctato.php">Contactar</a></button>
               </div>
             </div>`;
 

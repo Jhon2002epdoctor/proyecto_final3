@@ -1,18 +1,22 @@
+<?php 
+require_once("../config.php");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Contacto</title>
-    <link rel="stylesheet" href="/proyecto_final/css/navbar.css">
-    <link rel="stylesheet" href="/proyecto_final/css/footer.css">
-    <link rel="stylesheet" href="/proyecto_final/css/Conctato.css">
-    <link rel="stylesheet" href="/proyecto_final/estilo.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/navbar.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/footer.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/css/Conctato.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <?php include "../components/navbar.php"; ?>
+    <?php include dirname(__DIR__) . "/components/navbar.php"; ?>
     
     <div class="container mt-5">
         <h2>Contáctanos</h2>
@@ -34,7 +38,7 @@
                 <textarea class="form-control" id="message" name="mensaje" rows="5" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary botonEnviar">Enviar</button>
-            <input type="hidden" name="_next" value="http://localhost/proyecto_final/index.php">
+            <input type="hidden" name="_next" value="localhost:<?php echo BASE_URL;?>/index.php">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_subject" value="Nuevo mensaje de contacto">
             <input type="hidden" name="_template" value="box">
@@ -45,13 +49,13 @@
     <div class="container mt-5">
         <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.062746865769!2d-0.6983411234216539!3d37.99899687192962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd63a9955dd0dcab%3A0x81c93dbd4dc88f96!2sSecondary%20School%20Torrevigia!5e0!3m2!1sen!2ses!4v1715709356140!5m2!1sen!2ses" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-<a href=""></a>
-    <?php include "../components/footer.php"; ?>
+
+    <?php include dirname(__DIR__) . "/components/footer.php"; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
       document.querySelector('.botonEnviar').addEventListener('click', function() {
-        window.href.location = 'http://localhost/proyecto_final/index.php';
+        window.location.href = '<?php echo BASE_URL; ?>/index.php';
       });
     </script>
 </body>

@@ -1,4 +1,5 @@
 import { validarInput } from "../common/validaciones.js";
+import { BASE_URL } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const submit = document.getElementById("submit");
@@ -27,14 +28,14 @@ async function login(valores) {
   const contraseña = document.getElementById("contraseña").value;
 
   await fetch(
-    `/proyecto_final/Modelo/loginComprobacion.php?usuario=${usuario}&contraseña=${contraseña}`
+    `${BASE_URL}/Modelo/loginComprobacion.php?usuario=${usuario}&contraseña=${contraseña}`
   )
     .then((response) => response.json())
     .then((data) => {
       let verificado = data.verificado ?? "";
       if (verificado == "verificado") {
         localStorage.setItem("id", data.id);
-        window.location.href = "/proyecto_final/index.php";
+        window.location.href = `${BASE_URL}/index.php`;
       } else {
         const errorLogin = document.querySelector(".errorlogin");
         errorLogin.style.color = "red";

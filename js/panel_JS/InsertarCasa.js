@@ -1,4 +1,5 @@
 import { validarInput } from "../../common/validaciones.js";
+import { BASE_URL } from "../config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const modificarBtn = document.getElementById("modificarBtn");
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log(valores);
         const response = await fetch(
-          "/proyecto_final/Modelo/panel_control/InsertarCasa.php",
+          `${BASE_URL}/Modelo/panel_control/InsertarCasa.php`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok) {
 
           form.reset();
-          window.location.href = "/proyecto_final/Vista/Panel_control/panel.php";
+          window.location.href = `${BASE_URL}/Vista/Panel_control/panel.php`;
         }
 
       } catch (error) {

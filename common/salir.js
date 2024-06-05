@@ -1,3 +1,5 @@
+import { BASE_URL } from "../js/config.js";
+
 export async function Salir() {
     let salir = document.getElementById("salir");
 
@@ -6,7 +8,7 @@ export async function Salir() {
       event.preventDefault();
       localStorage.removeItem("id");
 
-      fetch("/proyecto_final/Modelo/llamadas/salir.php?salir=true")
+     await   fetch(`${BASE_URL}/Modelo/llamadas/salir.php?salir=true`)
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -15,7 +17,7 @@ export async function Salir() {
           console.error("Error:", error);
         });
 
-      window.location.href = "/proyecto_final/Vista/login.php";
+      window.location.href = `${BASE_URL}/Vista/login.php`;
     });
   }
 }

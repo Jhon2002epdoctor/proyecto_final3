@@ -1,3 +1,7 @@
+<?php 
+require("../config.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +18,10 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/proyecto_final/css/navbar.css">
-    <link rel="stylesheet" href="/proyecto_final/css/img_index.css">
-    <link rel="stylesheet" href="/proyecto_final/css/footer.css">
-    <link rel="stylesheet" href="/proyecto_final/estilo.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL?>/css/navbar.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL?>/css/img_index.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL?>/css/footer.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL?>/estilo.css">
     <style>
 body {
     font-family: Arial, sans-serif;

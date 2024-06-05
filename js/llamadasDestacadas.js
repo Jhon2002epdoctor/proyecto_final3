@@ -1,9 +1,10 @@
 import { Megusta, attachClickHandlers } from "../common/Inserccion.js";
 import { DescargarPDF } from "../common/pdf.js";
+import { BASE_URL } from "./config.js";
 
 export async function LlamadasDestacadas() {
   const response = await fetch(
-    "/proyecto_final/Modelo/llamadas/destacados.php"
+    `${BASE_URL}/Modelo/llamadas/destacados.php`
   );
   const data = await response.json();
 
@@ -59,7 +60,7 @@ async function InsertarCasas(datos) {
               </div>
               <div class="icons-3 flex padding-bottom-10 padding-top-10">
                 <i style="font-size: 18px" class="fa">&#xf095;</i>
-                <button class="boton3"><a href="/proyecto_final/Vista/Conctato.php">Contactar</a></button>
+                <button class="boton3"><a href="${BASE_URL}/Vista/Conctato.php">Contactar</a></button>
               </div>
             </div>`;
 
