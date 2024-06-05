@@ -58,7 +58,7 @@ if ($stmt) {
             $imagenes = array_filter($imagenes);
 
             $casas[] = [
-                'id_casa' => $row['id_casa'],
+                'id' => $row['id_casa'],
                 'descprcion' => $row['descprcion'],
                 'habitaciones' => $row['habitaciones'],
                 'titulo' => $row['titulo'],

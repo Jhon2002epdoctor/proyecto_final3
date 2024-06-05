@@ -19,6 +19,7 @@ export  class PaginacionBuscador extends Paginacion {
       const panel_paginacion = document.querySelector("#paginacion");
 
       if (data.length === 0) {
+         console.log(data);
           penel_contenedor.innerHTML = "<h1 class='encontrado' >No se han encontrado resultados</h1>";
           panel.innerHTML = "";
           panel_paginacion.innerHTML = "";

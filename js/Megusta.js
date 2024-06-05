@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded" ,  async () => {
 })
 
 async function InsertarCasas(datos) {
-  let panel = document.querySelector(".panel-contenedor");
+  const panel = document.querySelector(".panel-contenedor");
   panel.innerHTML = "";
 
   if (datos.length) {
@@ -39,7 +39,7 @@ async function InsertarCasas(datos) {
             : ``;
 
           let pdf = id
-            ? `  <i class="fa fa-file-pdf-o pdf" data-id="${item.id} style="font-size:18px"></i>`
+            ? `  <i class="fa fa-file-pdf-o pdf" data-id="${item.id}"font-size:18px"></i>`
             : ``;
 
           const cardHTML = `
@@ -78,4 +78,6 @@ async function InsertarCasas(datos) {
   attachClickHandlers();
   Megusta();
 }
+
+
 

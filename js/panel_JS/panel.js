@@ -140,7 +140,7 @@ async function applyFilters() {
       InsertarCasas
     );
   
-    await paginacion.IniciarEjecuccion("/proyecto_final/Modelo/Buscador2.php", {
+    await paginacion.IniciarEjecuccion("/proyecto_final/Modelo/panel_control/Buscador.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

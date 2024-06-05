@@ -12,7 +12,7 @@ export  class Paginacion {
         try {
             const response = await fetch(url , ConfiguracionFetch);
             const data = await response.json();
-             
+            
             if(!data.message){
                 console.log(data);
                 this.datos = data;

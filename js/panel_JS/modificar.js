@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   botonModificar.addEventListener("click", async () => {
     ModificarCasa(imagenesArray , id);
+   
   });
 });
 
@@ -48,7 +49,9 @@ async function MostrarCasa(id) {
         ciudad.value = data[0].ciudad;
         precio.value = data[0].precio;
         descripcion.value = data[0].descripcion;
+        console.log(data[0].destacado); 
         destacado.checked = data[0].destacado === 1 ? true : false;
+        console.log(destacado.checked);
         oculto.checked = data[0].oculto === 1 ? true : false;
         tipo.value = data[0].titulo;
       
@@ -114,5 +117,6 @@ async function ModificarCasa(imagenesArray , id) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      window.location.href = "/proyecto_final/Vista/Panel_control/panel.php";
     });
 }

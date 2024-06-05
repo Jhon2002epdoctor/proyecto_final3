@@ -34,7 +34,7 @@ include "../../components/navbar.php"
   ob_end_flush();
 ?>
 <div class="contenedor">
-    <h2>InsertarCasa</h2>
+    <h2>Insertar Inmueble</h2>
     <form id="propertyForm">
 
         <label class="validarDescripcion"></label>

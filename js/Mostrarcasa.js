@@ -22,7 +22,7 @@ async function MostrarCasa(id) {
       data.forEach((item) => {
         informacion.innerHTML = `
              <p>${validacionItem(item.titulo)} en Venta en ${validacionItem(item.ciudad)}, ${validacionItem(item.comunidad_autonoma)}</p>
-             <p>${ validacionItem(item.precio)}$</p>
+             <p>${validacionItem(item.precio)}€</p>
         `;
       item.imagenes.forEach((img) => {
           carrusel.innerHTML += `  <div class="producto-carrusel">
@@ -37,7 +37,7 @@ async function MostrarCasa(id) {
         icons_casa.innerHTML = `
            <div class="icon-casa">
                 <p>Precio</p>
-                <p>${validacionItem(item.precio)}$</p>
+                <p>${validacionItem(item.precio)}€</p>
           </div>
           ${destacadoTexto}
           <div class="icon-casa">
@@ -58,8 +58,7 @@ async function MostrarCasa(id) {
           <div class="icon-casa">
               <p>m2</p>
               <div>
-              <i style='font-size:24px' class='far'>&#xf1ad;</i>
-              ${validacionItem(item.metros)}m2
+              ${validacionItem(item.metros)} m2
               </div>
           </div>
                <div class="icon-casa">

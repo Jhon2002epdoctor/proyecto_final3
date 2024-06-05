@@ -38,9 +38,13 @@
             <input type="checkbox" id="typeCheckbox" name="type">
             <label for="typeCheckbox">Tipo de casa</label>
             <select name="houseType" id="houseType" class="filter-input">
-                <option value="mansion">Mansión</option>
-                <option value="chalet">Chalet</option>
-                <option value="atico">Ático</option>
+                <option value="Mansion">Mansión</option>
+                <option value="Duplex">Duplex</option>
+                <option value="Piso">Piso</option>
+                <option value="Apartamento">Apartamento</option>
+                <option value="Chalet">Chalet</option>
+                <option value="Atico">Ático</option>
+                <option value="Estudio">Estudio</option>
             </select>
         </div>
         <button type="button" id="buscar">Aplicar filtros</button>

@@ -50,11 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(valores),
           }
         );
+  
+        console.log(response);
+        if (response.ok) {
 
-        if (response.success) {
           form.reset();
-        } else {
+          window.location.href = "/proyecto_final/Vista/Panel_control/panel.php";
         }
+
       } catch (error) {
         console.error("Error:", error);
       }
