@@ -11,7 +11,7 @@ $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
         </div>
         <ul>
             
-            <li><a href="/proyecto_final/index2.php">Inicio</a></li>
+            <li><a href="/proyecto_final/index.php">Inicio</a></li>
             <li><a href="/proyecto_final/Vista/Buscador.php">Buscador</a></li>
             <!-- <li><a href="/proyecto_final/Vista/login.php">Login</a></li> -->
             <li><a href="/proyecto_final/Vista/Conctato.php">Contacto</a></li>
@@ -23,7 +23,7 @@ $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
         <div class="menu_despegable">
             <i style="font-size: 24px" class="fa">&#xf0c9;</i>
             <ul class="menu_despegable_visible">
-                <li><a href="/proyecto_final/index2.php">Inicio</a></li>
+                <li><a href="/proyecto_final/index.php">Inicio</a></li>
                 <!-- <li><a href="/proyecto_final/Vista/login.php">Login</a></li> -->
                 <li><a href="/proyecto_final/Vista/Conctato.php">Contacto</a></li>
                 <li><a href="/proyecto_final/Vista/Buscador.php">Buscador</a></li>

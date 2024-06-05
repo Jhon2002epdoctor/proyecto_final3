@@ -34,7 +34,7 @@ async function login(valores) {
       let verificado = data.verificado ?? "";
       if (verificado == "verificado") {
         localStorage.setItem("id", data.id);
-        window.location.href = "/proyecto_final/index2.php";
+        window.location.href = "/proyecto_final/index.php";
       } else {
         const errorLogin = document.querySelector(".errorlogin");
         errorLogin.style.color = "red";

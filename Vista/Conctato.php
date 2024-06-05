@@ -34,7 +34,7 @@
                 <textarea class="form-control" id="message" name="mensaje" rows="5" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary botonEnviar">Enviar</button>
-            <input type="hidden" name="_next" value="http://localhost/proyecto_final/index2.php">
+            <input type="hidden" name="_next" value="http://localhost/proyecto_final/index.php">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_subject" value="Nuevo mensaje de contacto">
             <input type="hidden" name="_template" value="box">
@@ -51,7 +51,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
       document.querySelector('.botonEnviar').addEventListener('click', function() {
-        window.href.location = 'http://localhost/proyecto_final/index2.php';
+        window.href.location = 'http://localhost/proyecto_final/index.php';
       });
     </script>
 </body>

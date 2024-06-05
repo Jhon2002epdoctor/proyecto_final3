@@ -23,11 +23,11 @@ include "../../components/navbar.php"
 ?>
 <?php 
   if(!isset($_SESSION['rol'])){
-    header('Location: /proyecto_final/index2.php');
+    header('Location: /proyecto_final/index.php');
 
     exit();
   } else if($_SESSION['rol'] != "admin") {
-    header('Location: /proyecto_final/index2.php');
+    header('Location: /proyecto_final/index.php');
 
     exit();
   }
