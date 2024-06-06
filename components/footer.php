@@ -21,17 +21,17 @@
         <hr>
         <div class="footer-texto">
             <ul class="">
-                 <p class="titulo-footer">Sobre Adaix</p>
+                 <p class="titulo-footer">Sobre Vista Real State</p>
                 <li>¿Quienes somos?</li>
                 <li>Nuestra red</li>
-                <li>Noticias Adaix</li>
+                <li>Noticias Vista Real State</li>
                 <li>Aviso legal</li>
                 <li>Política de privacidad</li>
                 <li>Cookies</li>
                 <li>Contacto</li>
             </ul>
             <ul class="">
-            <p class="titulo-footer">Encuentra en Adaix</p>
+            <p class="titulo-footer">Encuentra en Vista Real State</p>
                 <li>Piso de segunda mano</li>
                 <li>Piso de obra nueva</li>
                 <li>Alquiler de pisos</li>
@@ -43,17 +43,17 @@
             <p class="titulo-footer">Franquicia</p>
                 <li>Buscar agencia inmobiliaria</li>
                 <li>Buscar Agente inmobiliario</li>
-                <li>Abrir una agencia Adaix</li>
+                <li>Abrir una agencia Vista Real State</li>
                 <li>Ser agente inmobiliario</li>
                 <li>Master Franquicia Internacional</li>
             </ul>
            <ul class="">
            <p class="titulo-footer">Descubre nuestro grupo</p>
-                <li>Adaix</li>
+                <li>Vista Real State</li>
                 <li>Casatoc</li>
                 <li>Myplaze</li>
                 <li>Flooges App</li>
-                <li>Seguros Generales Adaix</li>
+                <li>Seguros Generales Vista Real State</li>
                 <li>Kiwitu Startup</li>
            </ul>
        </div>
