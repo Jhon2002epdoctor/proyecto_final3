@@ -62,12 +62,12 @@ include "../../components/navbar.php"
 
         <label for="tipo">Tipo de Propiedad:</label>
         <select id="tipo" name="Tipo">
-            <option value="piso">Piso</option>
-            <option value="chalet">Chalet</option>
-            <option value="mansion">Mansión</option>
-            <option value="apartamento">Apartamento</option>
-            <option value="duplex">Dúplex</option>
-            <option value="estudio">Estudio</option>
+            <option value="Piso">Piso</option>
+            <option value="Chalet">Chalet</option>
+            <option value="Mansion">Mansión</option>
+            <option value="Apartamento">Apartamento</option>
+            <option value="Duplex">Dúplex</option>
+            <option value="Estudio">Estudio</option>
         </select>
 
 

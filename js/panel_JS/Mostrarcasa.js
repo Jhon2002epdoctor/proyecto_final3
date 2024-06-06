@@ -29,7 +29,7 @@ async function MostrarCasa(id) {
         `;
       item.imagenes.forEach((img) => {
           carrusel.innerHTML += `  <div class="producto-carrusel">
-                                        <img src="data:image/jpeg;base64,${img}" alt="imagen.">
+                                        <img src="../../img/${img}" alt="imagen.">
                                   </div>`;
         });
        let destacadoTexto = item.destacado == 1 ? ` <div class="icon-casa">

@@ -33,11 +33,11 @@ require("../config.php");
          
         <form>
           <label for="" class="errorlogin"></label>
-            <label class="validarUsuario"></label>
+            <label class="validarusuario"></label>
             <label for="usuario">Usuario:</label>
             <input type="text" id="usuario" name="Usuario" required>
 
-            <label class="validarContraseña"></label>
+            <label class="validarcontraseña"></label>
             <label for="contrasena">Contraseña:</label>
             <input type="password" id="contraseña" name="Contraseña" required autocomplete="password">
 

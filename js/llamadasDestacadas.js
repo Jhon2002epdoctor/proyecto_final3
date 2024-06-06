@@ -42,7 +42,7 @@ async function InsertarCasas(datos) {
           const cardHTML = `
             <div class="card">
               <div class="card-image-container">
-                <img src="data:image/jpeg;base64,${imagenPrincipal}" alt="Imagen">
+                <img src="./img/${imagenPrincipal}" alt="Imagen">
               </div>
               <div class="icons-1 flex padding-top-10">
                 <p class="precio">${item.precio}€</p>

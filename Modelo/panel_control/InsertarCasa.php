@@ -1,16 +1,16 @@
 <?php
+require("../../config.php");
+include "../../conexion.php"; 
 
-include '../../conexion.php';
-
-// Recoger datos del formulario
+// Recuperar datos del formulario
 $descripcion = $_POST['descripcion'] ?? '';
 $habitaciones = $_POST['habitaciones'] ?? 0;
 $titulo = $_POST['tipo'] ?? '';
 $precio = $_POST['precio'] ?? 0.0;
 $comunidad = $_POST['comunidad'] ?? '';
 $ciudad = $_POST['ciudad'] ?? '';
-$destacado = isset($_POST['destacado']) ? 1 : 0;
-$oculto = isset($_POST['oculto']) ? 1 : 0;
+$destacado = $_POST['destacado'] ?? 0;
+$oculto = $_POST['oculto'] ?? 0;
 $bano = $_POST['banos'] ?? 0;
 $metros = $_POST['metros'] ?? 0;
 
@@ -32,7 +32,7 @@ try {
         foreach ($_FILES['imagenes']['name'] as $key => $name) {
             $targetFile = $targetDir . basename($name);
             if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$key], $targetFile)) {
-                $imagenes[] = $targetFile;  // Guarda la ruta de la imagen para insertar en la base de datos
+                $imagenes[] = basename($name);  // Guarda la ruta de la imagen para insertar en la base de datos
             }
         }
     }
@@ -52,7 +52,7 @@ try {
     $conexion->commit();
     $response = ["success" => true, "message" => "Casa modificada correctamente"];
 } catch (Exception $e) {
-    $conexion->rollback();
+     echo $e; 
     $response = ["success" => false, "message" => "Error al modificar la casa: " . $e->getMessage()];
 }
 

@@ -35,8 +35,9 @@ async function MostrarCasa(id) {
   const destacado = document.querySelector("#destacado");
   const imagenes = document.querySelector(".imagenes-modificar");
   const oculto = document.querySelector("#oculto");
-  const tipo = document.querySelector("#tipo");
-  let ckecked = ``; 
+  const tipo = document.getElementById("tipo");
+
+    let ckecked = ``; 
 
   await fetch(
     `${BASE_URL}/Modelo/panel_control/MostraCasaModificada.php?id=${id}`
@@ -59,7 +60,7 @@ async function MostrarCasa(id) {
         data[0].imagenes.forEach((img) => {
           ckecked = img.oculto == 0 ? "" : "checked"
           imagenes.innerHTML += `  <div class="imagen-modificar">
-                                        <img src="data:image/jpeg;base64,${img.imagen}" alt="imagen.">
+                                        <img src="../../img/${img.imagen}" alt="imagen.">
                                         <label for="">Ocultar 
                                            <input type="checkbox" name="eliminar[]"  ${ckecked}  value="${img.id}"> 
                                         </label>

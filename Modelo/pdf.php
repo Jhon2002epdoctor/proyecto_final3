@@ -1,7 +1,7 @@
 <?php
 require('../fpdf/fpdf.php');
 
-// Clase extendida de FPDF para soportar UTF-8 y mostrar imágenes en base64
+// Clase extendida de FPDF para soportar UTF-8 y mostrar imágenes
 class PDF extends FPDF
 {
     function Header()
@@ -18,51 +18,11 @@ class PDF extends FPDF
         $this->Cell(0, 10, 'Página ' . $this->PageNo(), 0, 0, 'C');
     }
 
-    // Función para añadir una imagen desde un string base64
-    function AddBase64Image($base64_image, $x = null, $y = null, $w = 0, $h = 0)
+    // Función para añadir una imagen desde un archivo
+    function AddImage($file, $x = null, $y = null, $w = 0, $h = 0)
     {
-        // Eliminar el prefijo si existe
-        $base64_image = preg_replace('/^data:image\/[a-zA-Z]+;base64,/', '', $base64_image);
-        
-        // Decodificar la imagen
-        $imgdata = base64_decode($base64_image);
-        
-        if ($imgdata === false) {
-            die('Error: Base64 decoding failed.');
-        }
-        
-        // Determinar el tipo MIME
-        $f = finfo_open();
-        $mime_type = finfo_buffer($f, $imgdata, FILEINFO_MIME_TYPE);
-        finfo_close($f);
-        
-        if ($mime_type === false) {
-            die('Error: Could not determine MIME type.');
-        }
-        
-        // Obtener la extensión del archivo
-        $ext = explode('/', $mime_type)[1];
-        if (!$ext) {
-            die('Error: Could not determine file extension.');
-        }
-        
-        // Crear un archivo temporal
-        $img_file = tempnam(sys_get_temp_dir(), 'img_') . '.' . $ext;
-        if (file_put_contents($img_file, $imgdata) === false) {
-            die('Error: Could not write temporary image file.');
-        }
-        
-        // Verificar que el archivo se haya creado correctamente
-        if (!file_exists($img_file)) {
-            die("Error: Temporary image file does not exist: $img_file");
-        }
-        
-        // Añadir la imagen al PDF
-        $this->Image($img_file, $x, $y, $w, $h);
-        
-        // Eliminar el archivo temporal
-        if (!unlink($img_file)) {
-            die('Error: Could not delete temporary image file.');
+        if (file_exists($file)) {
+            $this->Image($file, $x, $y, $w, $h);
         }
     }
 }
@@ -81,7 +41,7 @@ if ($id_casa == 0) {
 
 $pdf = new PDF();
 
-$sql = "SELECT casa.*, imagenes.imagen AS base64_image
+$sql = "SELECT casa.*, imagenes.imagen AS image_path
         FROM casa
         LEFT JOIN imagenes ON casa.id_casa = imagenes.id_casa
         WHERE casa.id_casa = ?";
@@ -124,8 +84,8 @@ if ($result->num_rows > 0) {
     $pdf->Cell(0, 10, utf8_decode('Imágenes:'), 0, 1);
     $pdf->SetFont('Arial', '', 12);
     do {
-        if (!empty($row["base64_image"])) {
-            $pdf->AddBase64Image($row["base64_image"], null, null, 100, 100); // Ajusta el tamaño según sea necesario
+        if (!empty($row["image_path"])) {
+            $pdf->AddImage('../img/' . $row["image_path"], null, null, 100, 100); // Ajusta el tamaño según sea necesario
             $pdf->Ln(10);
         }
     } while ($row = $result->fetch_assoc());

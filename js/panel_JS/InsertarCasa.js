@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   modificarBtn.addEventListener("click", async (event) => {
     event.preventDefault();
-    const formdat = {};
+    const formData = new FormData();
 
     // Validar descripción
     const texarea = document.getElementById("descripcion");
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       seccion.style.color = "red";
       validacion.estado = false;
     } else {
-      formdat["descripcion"] = texarea.value.trim();
+      formData.append("descripcion", texarea.value.trim());
     }
 
     // Validar otros inputs excepto checkboxes
@@ -29,12 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (input.type !== "submit" && input.type !== "checkbox") {
         validarInput(input, validacion);
         if (input.type === "file") {
-          formdat[input.id] = [];
           for (let file of input.files) {
-            formdat[input.id].push(file);
+            formData.append(input.id + "[]", file);
           }
         } else {
-          formdat[input.id] = input.value.trim();
+          formData.append(input.id, input.value.trim());
         }
       }
     }
@@ -42,28 +41,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // Manejar checkboxes por separado
     const checkboxes = document.querySelectorAll("input[type='checkbox']");
     for (let checkbox of checkboxes) {
-      formdat[checkbox.id] = checkbox.checked ? "1" : "0";
+      formData.append(checkbox.id, checkbox.checked ? "1" : "0");
     }
-
-    // Debugging: Verificar el contenido del objeto formdat
-    console.log(formdat);
+    const select = document.getElementById("tipo");
+    formData.append(select.id , select.value)
+    // Debugging: Verificar el contenido del objeto FormData
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
 
     if (validacion.estado) {
       try {
         const response = await fetch(`${BASE_URL}/Modelo/panel_control/InsertarCasa.php`, {
           method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formdat),
+          body: formData,
         });
 
         if (response.ok) {
           const text = await response.text();
           alert(text);
           console.log(text);
-          // form.reset();
-          // window.location.href = `${BASE_URL}/Vista/Panel_control/panel.php`;
+           window.location.href = `${BASE_URL}/Vista/Panel_control/panel.php`;
         } else {
           console.error('Error en la respuesta del servidor');
         }

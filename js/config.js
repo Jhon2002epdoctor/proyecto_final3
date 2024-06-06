@@ -1,2 +1,2 @@
 // config.js
-export const BASE_URL = '/proyecto_final'; 
+export const BASE_URL = '/final'; 
