@@ -1,7 +1,7 @@
 
 export function validarInput(input, validacion) {
     const valor = input.value.trim();
-    let valido = document.querySelector(`.validar${input.name}`);
+    let valido = document.querySelector(`.validar${input.id}`);
     valido.innerHTML = "";
 
     switch (input.type) {

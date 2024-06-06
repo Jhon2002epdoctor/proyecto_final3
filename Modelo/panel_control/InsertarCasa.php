@@ -2,52 +2,59 @@
 
 include '../../conexion.php';
 
-
-$data = json_decode(file_get_contents("php://input"));
-
-
-$descripcion = $data->descripcion ?? '';
-$habitaciones = $data->habitaciones ?? 0;
-$titulo = $data->tipo ?? '';
-$precio = $data->precio ?? 0.0;
-$comunidad = $data->comunidad ?? '';
-$ciudad = $data->ciudad ?? '';
-$destacado = $data->destacado ? 1 : 0;
-$imagenes = $data->imagenes == "" ? [] : $data->imagenes; 
-$oculto = $data->oculto ? 1 : 0;
-$bano=  $data->banos ?? 0;
-$metros=  $data->metros ?? 0; 
-
+// Recoger datos del formulario
+$descripcion = $_POST['descripcion'] ?? '';
+$habitaciones = $_POST['habitaciones'] ?? 0;
+$titulo = $_POST['tipo'] ?? '';
+$precio = $_POST['precio'] ?? 0.0;
+$comunidad = $_POST['comunidad'] ?? '';
+$ciudad = $_POST['ciudad'] ?? '';
+$destacado = isset($_POST['destacado']) ? 1 : 0;
+$oculto = isset($_POST['oculto']) ? 1 : 0;
+$bano = $_POST['banos'] ?? 0;
+$metros = $_POST['metros'] ?? 0;
 
 try {
-
     $conexion->begin_transaction();
 
+    // Insertar datos de la casa
+    $sql_insert_casa = "INSERT INTO `casa` (`descprcion`, `habitaciones`, `titulo`, `precio`, `comunidad_autonoma`, `ciudad`, `destacado`, `oculto`, `banos`, `metros`)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt_casa = $conexion->prepare($sql_insert_casa);
+    $stmt_casa->bind_param("sisdssiiii", $descripcion, $habitaciones, $titulo, $precio, $comunidad, $ciudad, $destacado, $oculto, $bano, $metros);
+    $stmt_casa->execute();
+    $id_casa_insertada = $conexion->insert_id;
 
-            $sql_insert_casa = "INSERT INTO `casa` (`descprcion`, `habitaciones`, `titulo`, `precio`, `comunidad_autonoma`, `ciudad`, `destacado` ,`oculto`  , `banos` , `metros`)
-            VALUES (?, ?, ?, ?, ?, ?, ? , ? , ? , ? )";
-        $stmt_casa = $conexion->prepare($sql_insert_casa);
-        $stmt_casa->bind_param("sisdssiiii", $descripcion, $habitaciones, $titulo, $precio, $comunidad, $ciudad, $destacado , $oculto , $bano , $metros);
-        $stmt_casa->execute();
-        $id_casa_insertada = $conexion->insert_id;
-
-
-    $sql_insert_imagen = "INSERT INTO `imagenes` (`imagen`, `id_casa`, `ocultoImagen`) VALUES (?, ?, ?)";
-    $stmt_insert = $conexion->prepare($sql_insert_imagen);
-    $ocultoImagen = 0; 
-    foreach ($imagenes as $imagen) {
-        $stmt_insert->bind_param("sii", $imagen, $id_casa_insertada , $ocultoImagen);
-        $stmt_insert->execute();
+    // Manejar la subida de imágenes
+    $imagenes = [];
+    if (!empty($_FILES['imagenes']['name'][0])) {
+        $targetDir = "../../img/";
+        foreach ($_FILES['imagenes']['name'] as $key => $name) {
+            $targetFile = $targetDir . basename($name);
+            if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$key], $targetFile)) {
+                $imagenes[] = $targetFile;  // Guarda la ruta de la imagen para insertar en la base de datos
+            }
+        }
     }
-    $stmt_insert->close();
+
+    // Insertar las rutas de las imágenes en la base de datos
+    if (!empty($imagenes)) {
+        $sql_insert_imagen = "INSERT INTO `imagenes` (`imagen`, `id_casa`, `ocultoImagen`) VALUES (?, ?, ?)";
+        $stmt_insert = $conexion->prepare($sql_insert_imagen);
+        $ocultoImagen = 0; 
+        foreach ($imagenes as $imagen) {
+            $stmt_insert->bind_param("sii", $imagen, $id_casa_insertada, $ocultoImagen);
+            $stmt_insert->execute();
+        }
+        $stmt_insert->close();
+    }
+
     $conexion->commit();
     $response = ["success" => true, "message" => "Casa modificada correctamente"];
 } catch (Exception $e) {
-
     $conexion->rollback();
     $response = ["success" => false, "message" => "Error al modificar la casa: " . $e->getMessage()];
 }
-
 
 header('Content-Type: application/json');
 echo json_encode($response);

@@ -5,13 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const modificarBtn = document.getElementById("modificarBtn");
   const form = document.getElementById("propertyForm");
   let validacion = { estado: true };
-  let valores = {};
 
   modificarBtn.addEventListener("click", async (event) => {
     event.preventDefault();
-    const inputs = document.querySelectorAll("input");
+    const formdat = {};
+
+    // Validar descripción
     const texarea = document.getElementById("descripcion");
-    let seccion = document.querySelector(".validarDescripcion");
+    let seccion = document.querySelector(".validardescripcion");
     seccion.innerHTML = "";
 
     if (texarea.value.trim() === "") {
@@ -19,59 +20,56 @@ document.addEventListener("DOMContentLoaded", () => {
       seccion.style.color = "red";
       validacion.estado = false;
     } else {
-      valores["descripcion"] = texarea.value.trim();
+      formdat["descripcion"] = texarea.value.trim();
     }
 
+    // Validar otros inputs excepto checkboxes
+    const inputs = document.querySelectorAll("input, textarea");
     for (let input of inputs) {
-      validarInput(input, validacion);
-      if (input.type === "checkbox" || input.type === "file") {
-        valores[input.id] = input.type === "file" ? input.files : input.checked;
-      } else {
-        valores[input.id] = input.value.trim();
+      if (input.type !== "submit" && input.type !== "checkbox") {
+        validarInput(input, validacion);
+        if (input.type === "file") {
+          formdat[input.id] = [];
+          for (let file of input.files) {
+            formdat[input.id].push(file);
+          }
+        } else {
+          formdat[input.id] = input.value.trim();
+        }
       }
     }
 
-    const selectElement = document.getElementById("tipo");
-    valores["tipo"] = selectElement.value;
+    // Manejar checkboxes por separado
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+    for (let checkbox of checkboxes) {
+      formdat[checkbox.id] = checkbox.checked ? "1" : "0";
+    }
 
-    if (validacion.estado && valores.imagenes && valores.imagenes.length > 0) {
+    // Debugging: Verificar el contenido del objeto formdat
+    console.log(formdat);
+
+    if (validacion.estado) {
       try {
-        const imagePromises = Array.from(valores.imagenes).map((file) =>
-          convertFileToBase64(file)
-        );
-        const base64Images = await Promise.all(imagePromises);
-        valores["imagenes"] = base64Images.map((image) => image.split(",")[1]);
+        const response = await fetch(`${BASE_URL}/Modelo/panel_control/InsertarCasa.php`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formdat),
+        });
 
-        console.log(valores);
-        const response = await fetch(
-          `${BASE_URL}/Modelo/panel_control/InsertarCasa.php`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(valores),
-          }
-        );
-  
-        console.log(response);
         if (response.ok) {
-
-          form.reset();
-          window.location.href = `${BASE_URL}/Vista/Panel_control/panel.php`;
+          const text = await response.text();
+          alert(text);
+          console.log(text);
+          // form.reset();
+          // window.location.href = `${BASE_URL}/Vista/Panel_control/panel.php`;
+        } else {
+          console.error('Error en la respuesta del servidor');
         }
-
       } catch (error) {
-        console.error("Error:", error);
+        console.error('Error:', error);
       }
-    } else {
     }
   });
-
-  function convertFileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  }
 });

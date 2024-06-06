@@ -16,61 +16,53 @@ require("../../config.php");
     <link rel="stylesheet" href="<?php echo BASE_URL?>/css/Panelcss/InsertarCasa.css">
 </head>
 <body>
-   
-
 <?php 
-
 ob_start();
-
 include "../../components/navbar.php" 
 ?>
 <?php 
   if(!isset($_SESSION['rol'])){
     header('Location: <?php echo BASE_URL?>/index.php');
-
     exit();
   } else if($_SESSION['rol'] != "admin") {
     header('Location: <?php echo BASE_URL?>/index.php');
-
     exit();
   }
   ob_end_flush();
 ?>
 <div class="contenedor">
     <h2>Insertar Inmueble</h2>
-    <form id="propertyForm">
-
-        <label class="validarDescripcion"></label>
+    <form id="propertyForm" enctype="multipart/form-data">
+        <label class="validardescripcion"></label>
         <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" rows="4" name="Descripcion" placeholder="Ingresa una descripción"></textarea> 
+        <textarea id="descripcion" rows="4" name="descripcion" placeholder="Ingresa una descripción"></textarea> 
     
-        <label class="validarHabitaciones"></label>
+        <label class="validarhabitaciones"></label>
         <label for="habitaciones">Habitaciones:</label>
-        <input type="number" id="habitaciones" name="Habitaciones" placeholder="Cantidad de habitaciones">
+        <input type="number" id="habitaciones" name="habitaciones" placeholder="Cantidad de habitaciones">
 
-        <label class="validarPrecio"></label>
+        <label class="validarprecio"></label>
         <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="Precio" placeholder="Precio en USD">
+        <input type="number" id="precio" name="precio" placeholder="Precio en USD">
 
-        <label class="validarMetros"></label>
+        <label class="validarmetros"></label>
         <label for="metros">Metros cuadrados:</label>
-        <input type="number" id="metros" name="Metros" placeholder="Metros cuadrados de la casa"> 
+        <input type="number" id="metros" name="metros" placeholder="Metros cuadrados de la casa"> 
 
-        <label class="validarBaños"></label>
-        <label for="metros">Baños:</label>
-        <input type="number" id="banos" name="Baños" placeholder="Introduce los banos"> 
+        <label class="validarbanos"></label>
+        <label for="banos">Baños:</label>
+        <input type="number" id="banos" name="banos" placeholder="Introduce los baños"> 
 
-
-        <label class="validarComunidad"></label>
+        <label class="validarcomunidad"></label>
         <label for="comunidad">Comunidad:</label>
-        <input type="text" id="comunidad" name="Comunidad" placeholder="Nombre de la comunidad">
+        <input type="text" id="comunidad" name="comunidad" placeholder="Nombre de la comunidad">
 
-        <label class="validarCiudad"></label>
+        <label class="validarciudad"></label>
         <label for="ciudad">Ciudad:</label>
-        <input type="text" id="ciudad" name="Ciudad" placeholder="Nombre de la ciudad">
+        <input type="text" id="ciudad" name="ciudad" placeholder="Nombre de la ciudad">
 
         <label for="tipo">Tipo de Propiedad:</label>
-        <select id="tipo" name="Tipo">
+        <select id="tipo" name="tipo">
             <option value="Piso">Piso</option>
             <option value="Chalet">Chalet</option>
             <option value="Mansion">Mansión</option>
@@ -79,19 +71,17 @@ include "../../components/navbar.php"
             <option value="Estudio">Estudio</option>
         </select>
 
-
-
-        <label class="validarDestacado"></label>
+        <label class="validardestacado"></label>
         <label for="destacado">Propiedad Destacada:</label>
-        <input type="checkbox" id="destacado"  name="Destacado"> Marcar como destacado
+        <input type="checkbox" id="destacado" name="destacado"> Marcar como destacado
 
-        <label class="validarOculto"></label>
+        <label class="validaroculto"></label>
         <label for="oculto">Oculto:</label>
-        <input type="checkbox" id="oculto" name="Oculto"> Marcar como oculto
+        <input type="checkbox" id="oculto" name="oculto"> Marcar como oculto
 
-        <label class="validarImagenes"></label>
+        <label class="validarimagenes"></label>
         <label for="imagenes">Agregar más imágenes:</label>
-        <input type="file" id="imagenes" name="Imagenes" multiple>
+        <input type="file" id="imagenes" name="imagenes[]" multiple>
 
         <button type="submit" class="boton3" id="modificarBtn">Modificar</button>
     </form>
