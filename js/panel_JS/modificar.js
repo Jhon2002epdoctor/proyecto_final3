@@ -1,4 +1,3 @@
-import { convertFileToBase64 } from "../../common/ConVertirEnBase64.js";
 import { BASE_URL } from "../config.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -10,19 +9,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   let imagenesArray = [];
   await MostrarCasa(id);
 
-  document.getElementById("imagenes").addEventListener("change", async function (event) {
-     imagenesArray = [];
-     const files = event.target.files;  
-     const imagenesPromeso  = Array.from(files).map((file) => {
-         return  convertFileToBase64(file); 
-     })
-     const base64Images = await Promise.all(imagenesPromeso);
-      imagenesArray  = base64Images.map(image => image.split(",")[1]);  
-    });
+  document.getElementById("imagenes").addEventListener("change", function (event) {
+    imagenesArray = [];
+    const files = event.target.files;  
+    imagenesArray = Array.from(files);
+  });
 
   botonModificar.addEventListener("click", async () => {
-    ModificarCasa(imagenesArray , id);
-   
+    await ModificarCasa(imagenesArray, id);
   });
 });
 
@@ -37,88 +31,65 @@ async function MostrarCasa(id) {
   const oculto = document.querySelector("#oculto");
   const tipo = document.getElementById("tipo");
 
-    let ckecked = ``; 
-
-  await fetch(
-    `${BASE_URL}/Modelo/panel_control/MostraCasaModificada.php?id=${id}`
-  )
+  await fetch(`${BASE_URL}/Modelo/panel_control/MostraCasaModificada.php?id=${id}`)
     .then((response) => response.json())
     .then(async (data) => {
-      console.log(data);
       if (data.length) {
         habitaciones.value = data[0].habitaciones;
         comunidad.value = data[0].comunidad_autonoma;
         ciudad.value = data[0].ciudad;
         precio.value = data[0].precio;
         descripcion.value = data[0].descripcion;
-        console.log(data[0].destacado); 
-        destacado.checked = data[0].destacado === 1 ? true : false;
-        console.log(destacado.checked);
-        oculto.checked = data[0].oculto === 1 ? true : false;
+        destacado.checked = data[0].destacado === 1;
+        oculto.checked = data[0].oculto === 1;
         tipo.value = data[0].titulo;
-      
+
         data[0].imagenes.forEach((img) => {
-          ckecked = img.oculto == 0 ? "" : "checked"
-          imagenes.innerHTML += `  <div class="imagen-modificar">
-                                        <img src="../../img/${img.imagen}" alt="imagen.">
-                                        <label for="">Ocultar 
-                                           <input type="checkbox" name="eliminar[]"  ${ckecked}  value="${img.id}"> 
-                                        </label>
-                                   </div>`;
+          let checked = img.oculto == 0 ? "" : "checked";
+          imagenes.innerHTML += `<div class="imagen-modificar">
+                                    <img src="../../img/${img.imagen}" alt="imagen.">
+                                    <label>Ocultar 
+                                        <input type="checkbox" name="eliminar[]" ${checked} value="${img.id}"> 
+                                    </label>
+                                </div>`;
         });
       }
     })
     .catch((error) => console.error("Error:", error));
 }
 
-async function ModificarCasa(imagenesArray , id) {
+async function ModificarCasa(imagenesArray, id) {
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("descripcion", document.querySelector("textarea").value);
+  formData.append("habitaciones", document.querySelector("#habitaciones").value);
+  formData.append("precio", document.querySelector("#precio").value);
+  formData.append("comunidad", document.querySelector("#comunidad").value);
+  formData.append("ciudad", document.querySelector("#ciudad").value);
+  formData.append("destacado", document.querySelector("#destacado").checked ? 1 : 0);
+  formData.append("oculto", document.querySelector("#oculto").checked ? 1 : 0);
+  formData.append("titulo", document.querySelector("#tipo").value);
 
-  const checkboxes = document.querySelectorAll(
-    'input[name="eliminar[]"]'
-  );  
-  const descripcion = document.querySelector("textarea").value;
-  const habitaciones = document.querySelector("#habitaciones").value;
-  const precio = document.querySelector("#precio").value;
-  const comunidad = document.querySelector("#comunidad").value;
-  const ciudad = document.querySelector("#ciudad").value;
-  const destacado = document.querySelector("#destacado").checked;
-  const oculto = document.querySelector("#oculto").checked;
-  const tipo = document.querySelector("#tipo").value;
-  let valorCkeck = []
-  let valor = {}
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-  for (let checkbox of checkboxes) {
-    valor = {checked:checkbox.checked  , dataId:checkbox.value}
-    valorCkeck.push(valor);
-  }
+  checkboxes.forEach(checkbox => {
+    formData.append( checkbox.id, checkbox.checked);
+  });
 
-  const datosEnviar = {
-    id: id,
-    descripcion: descripcion,
-    habitaciones: habitaciones,
-    titulo: tipo,
-    precio: precio,
-    comunidad: comunidad,
-    ciudad: ciudad,
-    destacado: destacado,
-    imagenes: imagenesArray,
-    checkboxDataArray: valorCkeck,
-    oculto: oculto
-  };
-  console.log(datosEnviar);
-  await fetch(
-    `${BASE_URL}/Modelo/panel_control/Modificar.php?`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(datosEnviar),
-    }
-  )
+  imagenesArray.forEach((file, index) => {
+    formData.append(`imagenes[]`, file);
+  });
+
+  console.log([...formData]); // Debug: Muestra los datos en FormData
+
+  await fetch(`${BASE_URL}/Modelo/panel_control/Modificar.php`, {
+    method: "POST",
+    body: formData,
+  })
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
       window.location.href = `${BASE_URL}/Vista/Panel_control/panel.php`;
-    });
+    })
+    .catch((error) => console.error("Error:", error));
 }

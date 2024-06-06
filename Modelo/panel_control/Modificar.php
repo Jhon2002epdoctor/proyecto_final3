@@ -1,56 +1,77 @@
-
 <?php
-include '../../conexion.php'; 
-
-$data = json_decode(file_get_contents("php://input"));
-
-$id = $data->id;
-$descripcion = $data->descripcion;
-$habitaciones = $data->habitaciones;
-$titulo = $data->titulo;
-$precio = $data->precio;
-$comunidad = $data->comunidad;
-$ciudad = $data->ciudad;
-$destacado = $data->destacado ? 1 : 0;
-$imagenes = $data->imagenes;
-$idsOcultar = $data->checkboxDataArray;
-$oculto = $data->oculto ? 1 : 0;
+require("../../config.php");
+include "../../conexion.php";
 
 
-$updateCasaQuery = "UPDATE casa SET descprcion = ?, habitaciones = ?, titulo = ?, precio = ?, comunidad_autonoma = ?, ciudad = ?, destacado = ? , oculto = ? WHERE id_casa = ?" ;
-$stmtCasa = $conexion->prepare($updateCasaQuery);
-$stmtCasa->bind_param("sisdsssii", $descripcion, $habitaciones, $titulo, $precio, $comunidad, $ciudad, $destacado,$oculto,$id);
+$id = $_POST['id'] ?? 0;
+$descripcion = $_POST['descripcion'] ?? '';
+$habitaciones = $_POST['habitaciones'] ?? 0;
+$titulo = $_POST['titulo'] ?? '';
+$precio = $_POST['precio'] ?? 0.0;
+$comunidad = $_POST['comunidad'] ?? '';
+$ciudad = $_POST['ciudad'] ?? '';
+$destacado = $_POST['destacado'] == "true"? 1 : 0 ;
+$oculto = $_POST['oculto'] == "true"? 1 : 0 ;
 
 
-if ($stmtCasa->execute()) {
 
-    foreach ($idsOcultar as $idOcultar) {
-      $valorOculto =  $idOcultar->checked ? 1 : 0 ; 
-      $updateQuery = "UPDATE imagenes SET ocultoImagen = $valorOculto WHERE id_imagen = ?";
-      $stmt = $conexion->prepare($updateQuery);
-      $stmt->bind_param("i", $idOcultar->dataId);
-      $stmt->execute();
-      $stmt->close();
-  }
-  
-
-  $insertImagenQuery = "INSERT INTO imagenes (`imagen`, `id_casa` , `ocultoImagen`) VALUES (?, ?, ?)";
-  $stmtImagen = $conexion->prepare($insertImagenQuery);
-  $ocultoImagen = 0; 
-  foreach ($imagenes as $imagenBase64) {
-      $stmtImagen->bind_param("sii", $imagenBase64, $id , $ocultoImagen);
-      $stmtImagen->execute();
-  }
-  
-  $stmtImagen->close();
-    $response = ["success" => true, "message" => "Casa y/o imágenes modificadas correctamente"];
-} else {
-    $response = ["success" => false, "message" => "Error al actualizar los datos de la casa"];
+if ($id <= 0) {
+    echo json_encode(["success" => false, "message" => "ID de casa no válido."]);
+    exit();
 }
 
-$stmtCasa->close();
+try {
+    $conexion->begin_transaction();
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
+
+    $sql_update_casa = "UPDATE `casa` SET `descprcion` = ?, `habitaciones` = ?, `titulo` = ?, `precio` = ?, `comunidad_autonoma` = ?, `ciudad` = ?, `destacado` = ?, `oculto` = ? WHERE `id_casa` = ?";
+    $stmt_casa = $conexion->prepare($sql_update_casa);
+    $stmt_casa->bind_param("sisdssiii", $descripcion, $habitaciones, $titulo, $precio, $comunidad, $ciudad, $destacado, $oculto, $id);
+    $stmt_casa->execute();
+
+
+    $imagenes = [];
+    if (!empty($_FILES['imagenes']['name'][0])) {
+        $targetDir = "../../img/";
+        foreach ($_FILES['imagenes']['name'] as $key => $name) {
+            $targetFile = $targetDir . basename($name);
+            if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$key], $targetFile)) {
+                $imagenes[] =  basename($name);  
+            }
+        }
+    }
+
+
+    if (!empty($imagenes)) {
+        $sql_insert_imagen = "INSERT INTO `imagenes` (`imagen`, `id_casa`, `ocultoImagen`) VALUES (?, ?, ?)";
+        $stmt_insert = $conexion->prepare($sql_insert_imagen);
+        $ocultoImagen = 0; 
+        foreach ($imagenes as $imagen) {
+            $stmt_insert->bind_param("sii", $imagen, $id, $ocultoImagen);
+            $stmt_insert->execute();
+        }
+        $stmt_insert->close();
+    }
+
+
+    foreach ($checkboxDataArray as $checkboxData) {
+        $checked = $checkboxData['checked'] ? 1 : 0;
+        $dataId = $checkboxData['dataId'];
+        $sql_update_imagen = "UPDATE `imagenes` SET `ocultoImagen` = ? WHERE `id_imagen` = ?";
+        $stmt_update = $conexion->prepare($sql_update_imagen);
+        $stmt_update->bind_param("ii", $checked, $dataId);
+        $stmt_update->execute();
+    }
+
+    $conexion->commit();
+    $response = ["success" => true, "message" => "Casa modificada correctamente"];
+} catch (Exception $e) {
+    $conexion->rollback();
+    $response = ["success" => false, "message" => "Error al modificar la casa: " . $e->getMessage()];
+}
+
+header('Content-Type: application/json');
 echo json_encode($response);
+
+$conexion->close();
 ?>

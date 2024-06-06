@@ -30,19 +30,19 @@ require("../config.php");
       <div class="formulario">
             <form action="../Modelo/registroInsert" method="post">
                 <label for="" class="usuario"></label>
-                <label class="validarNombre" ></label>
+                <label class="validarnombre" ></label>
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="Nombre" required>
 
-                <label class="validarUsuario"></label>
+                <label class="validarusuario"></label>
                 <label for="usuario">Usuario:</label>
                 <input type="text" id="usuario" name="Usuario" required>
 
-                <label class="validarEmail"></label>
+                <label class="validaremail"></label>
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="Email" required>
 
-                <label class="validarContrasena"></label>
+                <label class="validarcontrasena"></label>
                 <label for="contrasena">Contraseña:</label>
                 <input type="password" id="contrasena" name="Contrasena" required>
 
