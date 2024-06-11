@@ -44,7 +44,7 @@ $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
                     <i class="fa fa-user-circle dropdown-toggle" style="font-size:24px"></i>
                     <div class="dropdown-menu">
                         <a href="<?php echo BASE_URL?>/Vista/Megusta.php"><i class="fa fa-heart"></i> Favoritos</a>
-                        <a href="" id="salir" ><i class="fa fa-sign-out"></i> Salir</a>
+                        <li><a href="" id="salir" ><i class="fa fa-sign-out"></i> Salir</a> </li>       
                     </div>
                 </div>
             <?php } else { ?>

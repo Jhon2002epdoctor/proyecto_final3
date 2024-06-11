@@ -1,23 +1,24 @@
 import { BASE_URL } from "../js/config.js";
 
 export async function Salir() {
-    let salir = document.getElementById("salir");
+  let salir = document.querySelectorAll("#salir");
 
   if (salir) {
-    salir.addEventListener("click", async (event) => {
-      event.preventDefault();
-      localStorage.removeItem("id");
+   await salir.forEach((element) => {
+      element.addEventListener("click", async (event) => {
+        event.preventDefault();
+        localStorage.removeItem("id");
 
-     await   fetch(`${BASE_URL}/Modelo/llamadas/salir.php?salir=true`)
-        .then((response) => response.json())
-        .then((data) => {
+        try {
+          const response = await fetch(`${BASE_URL}/Modelo/llamadas/salir.php?salir=true`);
+          const data = await response.json();
           console.log(data);
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error("Error:", error);
-        });
+        }
 
-      window.location.href = `${BASE_URL}/Vista/login.php`;
+        window.location.href = `${BASE_URL}/Vista/login.php`;
+      });
     });
   }
 }
