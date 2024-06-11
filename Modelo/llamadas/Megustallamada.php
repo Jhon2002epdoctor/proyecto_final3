@@ -22,7 +22,7 @@ JOIN
 JOIN
     megusta ON casa.id_casa = megusta.id_casa
 WHERE
-    megusta.id_usuario = ?
+    megusta.id_usuario = ? AND casa.oculto = 0
 GROUP BY
     casa.id_casa;
 ";
