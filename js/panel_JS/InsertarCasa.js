@@ -59,8 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (response.ok) {
           const text = await response.text();
-          alert(text);
-          console.log(text);
            window.location.href = `${BASE_URL}/Vista/Panel_control/panel.php`;
         } else {
           console.error('Error en la respuesta del servidor');

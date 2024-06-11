@@ -54,14 +54,14 @@ try {
     }
 
 
-    foreach ($checkboxDataArray as $checkboxData) {
-        $checked = $checkboxData['checked'] ? 1 : 0;
-        $dataId = $checkboxData['dataId'];
-        $sql_update_imagen = "UPDATE `imagenes` SET `ocultoImagen` = ? WHERE `id_imagen` = ?";
-        $stmt_update = $conexion->prepare($sql_update_imagen);
-        $stmt_update->bind_param("ii", $checked, $dataId);
-        $stmt_update->execute();
-    }
+    // foreach ($checkboxDataArray as $checkboxData) {
+    //     $checked = $checkboxData['checked'] ? 1 : 0;
+    //     $dataId = $checkboxData['dataId'];
+    //     $sql_update_imagen = "UPDATE `imagenes` SET `ocultoImagen` = ? WHERE `id_imagen` = ?";
+    //     $stmt_update = $conexion->prepare($sql_update_imagen);
+    //     $stmt_update->bind_param("ii", $checked, $dataId);
+    //     $stmt_update->execute();
+    // }
 
     $conexion->commit();
     $response = ["success" => true, "message" => "Casa modificada correctamente"];

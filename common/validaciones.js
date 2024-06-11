@@ -11,12 +11,18 @@ export function validarInput(input, validacion) {
                 valido.style.color = "red";
                 validacion.estado = false;
             }
+            else{
+                validacion.estado = true;
+            }
             break;
         case "password":
             if (valor === "") {
                 valido.innerHTML = "Introduce una contraseña";
                 valido.style.color = "red";
                 validacion.estado = false;
+            }
+            else{
+                validacion.estado = true;
             }
             break;
         case "number":
@@ -25,12 +31,18 @@ export function validarInput(input, validacion) {
                 valido.style.color = "red";
                 validacion.estado = false;
             }
+            else{
+                validacion.estado = true;
+            }
             break;
         case "email":
             if (valor === "" || !valor.includes("@")) {
                 valido.innerHTML = "Introduce un correo válido";
                 valido.style.color = "red";
                 validacion.estado = false;
+            }
+            else{
+                validacion.estado = true;
             }
             break;
         case "checkbox":
@@ -41,6 +53,9 @@ export function validarInput(input, validacion) {
                 valido.innerHTML = "Sube al menos una imagen";
                 valido.style.color = "red";
                 validacion.estado = false;
+            }
+            else{
+                validacion.estado = true;
             }
             break;
         default:
