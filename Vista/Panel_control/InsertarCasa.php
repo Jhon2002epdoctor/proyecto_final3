@@ -83,7 +83,7 @@ include "../../components/navbar.php"
         <label for="imagenes">Agregar más imágenes:</label>
         <input type="file" id="imagenes" name="imagenes[]" multiple>
 
-        <button type="submit" class="boton3" id="modificarBtn">Modificar</button>
+        <button type="submit" class="boton3" id="modificarBtn">Insertar</button>
     </form>
 </div>
 

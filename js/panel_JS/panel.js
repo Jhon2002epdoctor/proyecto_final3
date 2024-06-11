@@ -161,7 +161,7 @@ function BotonInsertarCasa(){
 async function DatosEstadisticas(){
  const ctx = document.getElementById('myChart');
     let dataResponsive = {}; 
-   await  fetch("/Proyecto_final/Modelo/Estadisticas.php")
+   await  fetch("/final/Modelo/Estadisticas.php")
      .then((response) => response.json())
      .then((data) => {
         dataResponsive = data; 
