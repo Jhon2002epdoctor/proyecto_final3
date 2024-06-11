@@ -74,7 +74,7 @@ if ($result->num_rows > 0) {
     $pdf->Cell(0, 10, utf8_decode('Características Principales:'), 0, 1);
     $pdf->SetFont('Arial', '', 12);
     $pdf->Cell(0, 10, utf8_decode('Número de Habitaciones: ' . ($row["habitaciones"] ?? 'N/A')), 0, 1);
-    $pdf->Cell(0, 10, utf8_decode('Precio: $' . number_format($row["precio"] ?? 0, 2) . ' USD'), 0, 1);
+    $pdf->Cell(0, 10, utf8_decode('Precio: $' . number_format($row["precio"] ?? 0, 2) . '€'), 0, 1);
     $pdf->Cell(0, 10, utf8_decode('Comunidad Autónoma: ' . ($row["comunidad_autonoma"] ?? 'N/A')), 0, 1);
     $pdf->Cell(0, 10, utf8_decode('Ciudad: ' . ($row["ciudad"] ?? 'N/A')), 0, 1);
     $pdf->Ln(10);

@@ -8,7 +8,7 @@ $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : '';
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <img src="<?php echo BASE_URL?>/img/logoSL.webp" alt="Logo">
+        <a href="<?php echo BASE_URL?>/index.php"><img src="<?php echo BASE_URL?>/img/logoSL.webp" alt="Logo"></a> 
         </div>
         <ul>
             <li><a href="<?php echo BASE_URL?>/index.php">Inicio</a></li>

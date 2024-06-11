@@ -79,7 +79,7 @@ include "../../components/navbar.php"
         
     </div>
     <div class="contenedor">
-     <button class="boton-insertar">Insertar Casa</button>    
+     <button class="boton-insertar">Insertar Inmueble</button>    
         <div id="contenedor-tarjetas" class="panel-contenedor">
             <div class="casa-panel">
                 <div class="id-panel">
